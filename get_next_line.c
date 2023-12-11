@@ -6,11 +6,11 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 01:14:45 by vabaud            #+#    #+#             */
-/*   Updated: 2023/12/11 11:56:54 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/11 16:24:06 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/include/MLX42/get_next_line.h"
+#include "get_next_line.h"
 
 void	remove_until_newline(char *buffer)
 {
