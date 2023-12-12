@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/12 19:09:31 by tbihoues         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:31:19 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ int main(void)
         {
 			if (map[x] == '1' ) // texture1 = mur
 				mlx_image_to_window(mlx, textureInfoArray[0].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (map[x] == '0' || map[x] == 'C' || map[x] == 'Y' || map[x] == 'W' || map[x] == 'F') // texture = sol
+			if (map[x] == '0' || map[x] == 'C' || map[x] == 'Y' || map[x] == 'W' || map[x] == 'F') // texture = sol
                 mlx_image_to_window(mlx, textureInfoArray[1].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (map[x] == 'C' ) // texture2 = collectable
+			if (map[x] == 'C' ) // texture2 = collectable
 				mlx_image_to_window(mlx, textureInfoArray[2].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (map[x] == 'E' ) // texture3 = sortie
+			if (map[x] == 'E' ) // texture3 = sortie
 				mlx_image_to_window(mlx, textureInfoArray[3].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (map[x] == 'P' ) // texture4 = king kong
-            {
+			if (map[x] == 'P' ) // texture4 = king kong
+			{
 				mlx_image_to_window(mlx, textureInfoArray[4].img, x * TILE_SIZE, y * TILE_SIZE);
-            }
+			}
 			if (map[x] == 'Y' ) // texture5 = echelle
 				mlx_image_to_window(mlx, textureInfoArray[5].img, x * TILE_SIZE, y * TILE_SIZE);
 			if (map[x] == 'W' ) // texture6 = support
