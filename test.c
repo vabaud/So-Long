@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/12 19:00:47 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/12 19:09:31 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		textureInfoArray[4].img->instances->y -= 16;
+		textureInfoArray[4].img->instances->y -= 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		textureInfoArray[4].img->instances->y += 16;
+		textureInfoArray[4].img->instances->y += 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		textureInfoArray[4].img->instances->x -= 16;
+		textureInfoArray[4].img->instances->x -= 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		textureInfoArray[4].img->instances->x += 16;
+		textureInfoArray[4].img->instances->x += 2;
    
 }
 
@@ -40,7 +40,7 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[1].texture = mlx_load_png("png/back2.png");
     textureInfoArray[2].texture = mlx_load_png("png/banana.png");
     textureInfoArray[3].texture = mlx_load_png("png/door.png");
-    textureInfoArray[4].texture = mlx_load_png("png/king.png");
+    textureInfoArray[4].texture = mlx_load_png("png/kingkong.png");
     textureInfoArray[5].texture = mlx_load_png("png/ladder.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc.png");
     textureInfoArray[7].texture = mlx_load_png("png/fire.png");
