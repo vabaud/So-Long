@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 01:14:45 by vabaud            #+#    #+#             */
-/*   Updated: 2023/12/11 16:24:06 by vabaud           ###   ########.fr       */
+/*   Created: 2023/12/11 16:25:31 by tbihoues          #+#    #+#             */
+/*   Updated: 2023/12/11 16:43:49 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "src/get_next_line.h"
 
 void	remove_until_newline(char *buffer)
 {
@@ -56,24 +56,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-/*int main(void)
-{
-	int fd = open("test.txt", O_RDONLY);  // Ouvre le fichier en lecture seule
-	char *line;
-
-	if (fd == -1)
-	{
-		perror("Error opening file");
-		return (1);
-	}
-
-	line = get_next_line(fd);
-	printf("Line read: %s\n", line);
-	free(line);
-
-	close(fd); 
-		// N'oubliez pas de fermer le descripteur de fichier après utilisation
-
-	return (0);
-}*/

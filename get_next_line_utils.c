@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 01:15:08 by vabaud            #+#    #+#             */
-/*   Updated: 2023/12/11 16:24:00 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/11 16:43:11 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "src/get_next_line.h"
 
 char	*ft_strjoin(char *s1, char *s2, size_t len_s1, size_t len_s2)
 {
