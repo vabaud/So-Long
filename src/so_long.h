@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/12 15:58:18 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/12 18:58:46 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <stdbool.h>
 
 typedef struct {
-    float x, y;
-    mlx_texture_t *texture;
-} Character;
+    mlx_texture_t* texture;
+    mlx_image_t* img;
+} TextureInfo;
 
-static Character character;
+TextureInfo textureInfoArray[8];
 
 void ft_hook(void* param);
 int main(void);
