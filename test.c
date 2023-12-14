@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/12 19:31:19 by tbihoues         ###   ########.fr       */
+/*   Updated: 2023/12/14 01:00:36 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,44 @@
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 400
 
-void ft_hook(void* param)
-{
-	mlx_t* mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		textureInfoArray[4].img->instances->y -= 2;
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		textureInfoArray[4].img->instances->y += 2;
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		textureInfoArray[4].img->instances->x -= 2;
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		textureInfoArray[4].img->instances->x += 2;
-   
+TextureInfo textureInfoArray[8];
+
+
+int isPositionValid(int x, int y) {
+    // Vérifiez si la nouvelle position (x, y) ne correspond pas à un mur (représenté par '1' dans la carte)
+    int mapX = x / 16;
+    int mapY = y / 16;
+    printf("%c\n", mapy.mapp[mapY][mapX]);
+    return mapy.mapp[mapY][mapX] != '1';
+}
+
+void ft_hook(void* param) {
+    mlx_t* mlx = param;
+
+    if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+        mlx_close_window(mlx);
+
+    int newX = textureInfoArray[4].img->instances->x;
+    int newY = textureInfoArray[4].img->instances->y;
+    if (mlx_is_key_down(mlx, MLX_KEY_W) && (newY - 16 != textureInfoArray[0].img->instances->y)) {
+        newY -= 16;
+    }
+    if (mlx_is_key_down(mlx, MLX_KEY_S) && (newY + 16 != textureInfoArray[0].img->instances->y)) {
+        newY += 16;
+    }
+    if (mlx_is_key_down(mlx, MLX_KEY_A) && (newX - 16 != textureInfoArray[0].img->instances->x)) {
+        newX -= 16;
+    }
+    if (mlx_is_key_down(mlx, MLX_KEY_D) && (newX + 16 != textureInfoArray[0].img->instances->x)) {
+        newX += 16;
+    }
+
+    // Vérifier la collision avec les murs
+    if (isPositionValid(newX, newY)) {
+        // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
+        textureInfoArray[4].img->instances->x = newX;
+        textureInfoArray[4].img->instances->y = newY;
+    }
 }
 
 void initializeTextures(mlx_t* mlx) {
@@ -44,14 +68,6 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[5].texture = mlx_load_png("png/ladder.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc.png");
     textureInfoArray[7].texture = mlx_load_png("png/fire.png");
-    textureInfoArray[0].img = mlx_texture_to_image(mlx, textureInfoArray[0].texture);
-    textureInfoArray[1].img = mlx_texture_to_image(mlx, textureInfoArray[1].texture);
-    textureInfoArray[2].img = mlx_texture_to_image(mlx, textureInfoArray[2].texture);
-    textureInfoArray[3].img = mlx_texture_to_image(mlx, textureInfoArray[3].texture);
-    textureInfoArray[4].img = mlx_texture_to_image(mlx, textureInfoArray[4].texture);
-    textureInfoArray[5].img = mlx_texture_to_image(mlx, textureInfoArray[5].texture);
-    textureInfoArray[6].img = mlx_texture_to_image(mlx, textureInfoArray[6].texture);
-    textureInfoArray[7].img = mlx_texture_to_image(mlx, textureInfoArray[7].texture);
 
     while (i < 8)
     {
@@ -64,8 +80,7 @@ void initializeTextures(mlx_t* mlx) {
 int main(void)
 {
     mlx_t* mlx;
-    char *map;
-    int y = 0;
+
     mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
     if (!mlx)
     {
@@ -79,34 +94,7 @@ int main(void)
 		perror("Error opening file");
 		return (1);
 	}
-    while ((map = get_next_line(fd)) != NULL)
-    {
-        int x = 0;
-        while (map[x] != '\0')
-        {
-			if (map[x] == '1' ) // texture1 = mur
-				mlx_image_to_window(mlx, textureInfoArray[0].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == '0' || map[x] == 'C' || map[x] == 'Y' || map[x] == 'W' || map[x] == 'F') // texture = sol
-                mlx_image_to_window(mlx, textureInfoArray[1].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == 'C' ) // texture2 = collectable
-				mlx_image_to_window(mlx, textureInfoArray[2].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == 'E' ) // texture3 = sortie
-				mlx_image_to_window(mlx, textureInfoArray[3].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == 'P' ) // texture4 = king kong
-			{
-				mlx_image_to_window(mlx, textureInfoArray[4].img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			if (map[x] == 'Y' ) // texture5 = echelle
-				mlx_image_to_window(mlx, textureInfoArray[5].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == 'W' ) // texture6 = support
-				mlx_image_to_window(mlx, textureInfoArray[6].img, x * TILE_SIZE, y * TILE_SIZE);
-			if (map[x] == 'F' ) // texture = feux
-				mlx_image_to_window(mlx, textureInfoArray[7].img, x * TILE_SIZE, y * TILE_SIZE);
-            x += 1;
-        }
-        y += 1;
-        free(map);
-    }
+    aff_map(fd, mlx);
     close(fd);
     // Affichage de la carte
     mlx_loop_hook(mlx, ft_hook, mlx);
