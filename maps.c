@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/13 19:32:26 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/14 17:59:32 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ lamap mapy;
 void aff_map(int fd, mlx_t *mlx)
 {
     int x;
-    int y = 1;
+    int y = 0;
     mapy.mapp = malloc(100 * sizeof(char *));
     while ((mapy.mapp[y] = get_next_line(fd)) != NULL)
     {
@@ -60,5 +60,4 @@ void aff_map(int fd, mlx_t *mlx)
         }
         y++;
     }
-    free(mapy.mapp);
 }

@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/14 01:00:36 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/16 19:10:52 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,27 @@
 
 TextureInfo textureInfoArray[8];
 
+/* J'ai remis y=0 dans le fichier maps.c, j'ai enleve le free() et on peux pas passer dans le coin en haut a droite,
+ mais y a un leak donc c'est possible que ce soit mon gnl.
+  On peux plus passer passer a travers les W et on peux monter que aux echelles */
+
 
 int isPositionValid(int x, int y) {
     // Vérifiez si la nouvelle position (x, y) ne correspond pas à un mur (représenté par '1' dans la carte)
     int mapX = x / 16;
     int mapY = y / 16;
-    printf("%c\n", mapy.mapp[mapY][mapX]);
-    return mapy.mapp[mapY][mapX] != '1';
+    if (mapy.mapp[mapY][mapX] != 'W' && mapy.mapp[mapY][mapX] != '1')
+        return 1;
+    return 0;
+}
+
+int notladder(int x, int y)
+{
+    int mapX = x / 16;
+    int mapY = y / 16;
+    if (mapy.mapp[mapY][mapX] != 'Y')
+        return 0;
+    return 1;
 }
 
 void ft_hook(void* param) {
@@ -34,22 +48,20 @@ void ft_hook(void* param) {
 
     if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
         mlx_close_window(mlx);
-
     int newX = textureInfoArray[4].img->instances->x;
     int newY = textureInfoArray[4].img->instances->y;
-    if (mlx_is_key_down(mlx, MLX_KEY_W) && (newY - 16 != textureInfoArray[0].img->instances->y)) {
+    if (mlx_is_key_down(mlx, MLX_KEY_W) && notladder(newX, newY)) {
         newY -= 16;
     }
-    if (mlx_is_key_down(mlx, MLX_KEY_S) && (newY + 16 != textureInfoArray[0].img->instances->y)) {
+    if (mlx_is_key_down(mlx, MLX_KEY_S)) {
         newY += 16;
     }
-    if (mlx_is_key_down(mlx, MLX_KEY_A) && (newX - 16 != textureInfoArray[0].img->instances->x)) {
+    if (mlx_is_key_down(mlx, MLX_KEY_A)) {
         newX -= 16;
     }
-    if (mlx_is_key_down(mlx, MLX_KEY_D) && (newX + 16 != textureInfoArray[0].img->instances->x)) {
+    if (mlx_is_key_down(mlx, MLX_KEY_D)) {
         newX += 16;
     }
-
     // Vérifier la collision avec les murs
     if (isPositionValid(newX, newY)) {
         // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
