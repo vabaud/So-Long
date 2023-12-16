@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/14 01:00:36 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/16 17:13:01 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42/include/MLX42/MLX42.h"
 #include "src/get_next_line.h"
 #include "src/so_long.h"
+#include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <sys/time.h> 
 
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 400
@@ -29,34 +32,49 @@ int isPositionValid(int x, int y) {
     return mapy.mapp[mapY][mapX] != '1';
 }
 
+unsigned long long getCurrentTimeInMilliseconds() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000;
+}
+
 void ft_hook(void* param) {
     mlx_t* mlx = param;
 
     if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
         mlx_close_window(mlx);
 
+    static unsigned long long lastMoveTime = 0;
+    unsigned long long currentTime = getCurrentTimeInMilliseconds(100); // Vous devez implémenter cette fonction
+
+    int moveAmount = 16; // Réduisez la quantité de déplacement souhaitée
     int newX = textureInfoArray[4].img->instances->x;
     int newY = textureInfoArray[4].img->instances->y;
-    if (mlx_is_key_down(mlx, MLX_KEY_W) && (newY - 16 != textureInfoArray[0].img->instances->y)) {
-        newY -= 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_S) && (newY + 16 != textureInfoArray[0].img->instances->y)) {
-        newY += 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_A) && (newX - 16 != textureInfoArray[0].img->instances->x)) {
-        newX -= 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_D) && (newX + 16 != textureInfoArray[0].img->instances->x)) {
-        newX += 16;
-    }
 
-    // Vérifier la collision avec les murs
-    if (isPositionValid(newX, newY)) {
-        // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
-        textureInfoArray[4].img->instances->x = newX;
-        textureInfoArray[4].img->instances->y = newY;
+    if (currentTime - lastMoveTime >= 400) { // Attendre 300 millisecondes (0.3 secondes) entre chaque déplacement
+        if (mlx_is_key_down(mlx, MLX_KEY_W) && (newY - moveAmount != textureInfoArray[0].img->instances->y)) {
+            newY -= moveAmount;
+        }
+        if (mlx_is_key_down(mlx, MLX_KEY_S) && (newY + moveAmount != textureInfoArray[0].img->instances->y)) {
+            newY += moveAmount;
+        }
+        if (mlx_is_key_down(mlx, MLX_KEY_A) && (newX - moveAmount != textureInfoArray[0].img->instances->x)) {
+            newX -= moveAmount;
+        }
+        if (mlx_is_key_down(mlx, MLX_KEY_D) && (newX + moveAmount != textureInfoArray[0].img->instances->x)) {
+            newX += moveAmount;
+        }
+
+        // Vérifier la collision avec les murs
+        if (isPositionValid(newX, newY)) {
+            // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
+            textureInfoArray[4].img->instances->x = newX;
+            textureInfoArray[4].img->instances->y = newY;
+            lastMoveTime = currentTime;
+        }
     }
 }
+
 
 void initializeTextures(mlx_t* mlx) {
     int i = 0;
