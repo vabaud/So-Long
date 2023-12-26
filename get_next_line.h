@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 01:12:03 by vabaud            #+#    #+#             */
-/*   Updated: 2023/12/09 19:46:40 by vabaud           ###   ########.fr       */
+/*   Updated: 2023/12/17 23:02:41 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char				*ft_strjoin(char *s1, char *s2, size_t len_s1,
 						size_t len_s2);
 char				*ft_strchr(const char *s, int c);
 void				remove_until_newline(char *buffer);
+unsigned long long 	getCurrentTimeInMilliseconds();
 
 #endif
