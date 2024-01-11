@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/11 18:06:47 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:24:27 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,29 @@ int main(void)
     close(fd);
     // Affichage de la carte
     mlx_loop_hook(mlx, ft_hook, mlx);
-    mlx_loop(mlx);
-    mlx_terminate(mlx);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
 
-    return 0;
+	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
