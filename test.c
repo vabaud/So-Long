@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/11 18:24:27 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/12 00:50:57 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,121 +126,34 @@ int main(void)
 	return 0;
 }
 
+// Structure pour représenter un tonneau
+typedef struct s_barrel {
+    int x, y;       // Position actuelle du tonneau
+    int frame;      // Frame actuelle de l'animation
+} t_barrel;
 
+// Fonction pour mettre à jour la position du tonneau
+void update_barrel_position(t_barrel *barrel, int speed) {
+    barrel->x -= speed; // Déplacer le tonneau vers la gauche
+    if (barrel->x < 0) {
+        barrel->x = 0; // Réinitialiser la position si elle sort de l'écran
+    }
+}
 
+// Fonction pour mettre à jour la frame de l'animation du tonneau
+void update_barrel_animation(t_barrel *barrel, int total_frames) {
+    barrel->frame = (barrel->frame + 1) % total_frames; // Alterner entre 0 et 3 si total_frames est 4
+}
 
+// Appelé à chaque frame par votre boucle de jeu
+void game_update(t_barrel *barrels, int num_barrels, int speed) {
+    for (int i = 0; i < num_barrels; i++) {
+        update_barrel_position(&barrels[i], speed);
+        update_barrel_animation(&barrels[i], 4); // Si vous avez 4 frames
+        // Dessinez le tonneau ici en utilisant barrel->frame pour choisir la bonne image
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// int		close_window(t_env *env)
-// {
-// 	exit_game(env, 0);
-// 	return(0);
-// }
-
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <stdbool.h>
-// #include "MLX42/include/MLX42/MLX42.h"
-
-// #define WIDTH 512
-// #define HEIGHT 512
-
-// static mlx_image_t* image;
-
-// // -----------------------------------------------------------------------------
-
-// int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-// {
-//     return (r << 24 | g << 16 | b << 8 | a);
-// }
-
-// void ft_randomize()
-// {
-// 	for (uint32_t i = 0; i < image->width; ++i)
-// 	{
-// 		for (uint32_t y = 0; y < image->height; ++y)
-// 		{
-// 			uint32_t color = ft_pixel(
-// 				0xFF, // R
-// 				0x00, // G
-// 				0x00, // B
-// 				0xFF  // A
-// 			);
-// 			mlx_put_pixel(image, i, y, color);
-// 		}
-// 	}
-// }
-
-// void ft_hook(void* param)
-// {
-// 	mlx_t* mlx = param;
-
-// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-// 		mlx_close_window(mlx);
-// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-// 		image->instances[0].y -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-//  	image->instances[0].y += 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-// 		image->instances[0].x -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-// 		image->instances[0].x += 5;
-// }
-
-// // -----------------------------------------------------------------------------
-
-// // void test()
-// // {
-// //     printf("une touche a ete pressee\n");
-// //     return;
-// // }
-
-// int32_t main()
-// {
-// 	mlx_t* mlx;
-
-// 	// Gotta error check this stuff
-// 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-// 	{
-// 		puts(mlx_strerror(mlx_errno));
-// 		return(EXIT_FAILURE);
-// 	}
-// 	if (!(image = mlx_new_image(mlx, 128, 128)))
-// 	{
-// 		mlx_close_window(mlx);
-// 		puts(mlx_strerror(mlx_errno));
-// 		return(EXIT_FAILURE);
-// 	}
-// 	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-// 	{
-// 		mlx_close_window(mlx);
-// 		puts(mlx_strerror(mlx_errno));
-// 		return(EXIT_FAILURE);
-// 	}
-	
-// 	mlx_loop_hook(mlx, ft_randomize, mlx);
-// 	mlx_loop_hook(mlx, ft_hook, mlx);
-//     //mlx_key_hook(mlx, test, NULL);
-
-// 	mlx_loop(mlx);
-// 	mlx_terminate(mlx);
-// 	return (EXIT_SUCCESS);
-// }
+// Dans votre fonction principale ou initialisation du jeu
+t_barrel barrels[4]; // Définir NUM_BARRELS comme le nombre de tonneaux
+// Initialiser les tonneaux ici...
