@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/11 15:14:15 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:11:37 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 400
 
-TextureInfo textureInfoArray[8];
+TextureInfo textureInfoArray[13];
 
 unsigned long long getCurrentTimeInMilliseconds() {
     struct timeval tv;
@@ -85,8 +85,13 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[5].texture = mlx_load_png("png/ladder.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc.png");
     textureInfoArray[7].texture = mlx_load_png("png/fire.png");
+    textureInfoArray[8].texture = mlx_load_png("png/barrel1.png");
+    textureInfoArray[9].texture = mlx_load_png("png/barrel2.png");
+    textureInfoArray[10].texture = mlx_load_png("png/barrel3.png");
+    textureInfoArray[11].texture = mlx_load_png("png/barrel4.png");
 
-    while (i < 8)
+
+    while (i < 12)
     {
         textureInfoArray[i].img = mlx_texture_to_image(mlx, textureInfoArray[i].texture);
         mlx_delete_texture(textureInfoArray[i].texture);

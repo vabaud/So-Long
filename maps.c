@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/14 17:59:32 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:19:15 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void aff_map(int fd, mlx_t *mlx)
         {
             if (mapy.mapp[y][x] == '1' ) // texture1 = mur
                 mlx_image_to_window(mlx, textureInfoArray[0].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (mapy.mapp[y][x] == '0' || mapy.mapp[y][x] == 'C' || mapy.mapp[y][x] == 'P' || mapy.mapp[y][x] == 'Y' || mapy.mapp[y][x] == 'W' || mapy.mapp[y][x] == 'F') // texture = sol
+            if (mapy.mapp[y][x] == '0' || mapy.mapp[y][x] == 'C' || mapy.mapp[y][x] == 'P' || mapy.mapp[y][x] == 'Y' || mapy.mapp[y][x] == 'W' || mapy.mapp[y][x] == 'F' 
+			|| mapy.mapp[y][x] == '2' || mapy.mapp[y][x] == '3' || mapy.mapp[y][x] == '4' || mapy.mapp[y][x] == '5')
                 mlx_image_to_window(mlx, textureInfoArray[1].img, x * TILE_SIZE, y * TILE_SIZE);
             if (mapy.mapp[y][x] == 'E' ) // texture3 = sortie
                 mlx_image_to_window(mlx, textureInfoArray[3].img, x * TILE_SIZE, y * TILE_SIZE);
@@ -40,6 +41,14 @@ void aff_map(int fd, mlx_t *mlx)
                 mlx_image_to_window(mlx, textureInfoArray[6].img, x * TILE_SIZE, y * TILE_SIZE);
             if (mapy.mapp[y][x] == 'F' ) // texture = feux
                 mlx_image_to_window(mlx, textureInfoArray[7].img, x * TILE_SIZE, y * TILE_SIZE);
+            if (mapy.mapp[y][x] == '2' ) // texture = barrel
+				mlx_image_to_window(mlx, textureInfoArray[8].img, x * TILE_SIZE, y * TILE_SIZE);
+			if (mapy.mapp[y][x] == '3' ) // texture = barrel
+				mlx_image_to_window(mlx, textureInfoArray[9].img, x * TILE_SIZE, y * TILE_SIZE);
+			if (mapy.mapp[y][x] == '4' ) // texture = barrel
+				mlx_image_to_window(mlx, textureInfoArray[10].img, x * TILE_SIZE, y * TILE_SIZE);
+			if (mapy.mapp[y][x] == '5' ) // texture = barrel
+				mlx_image_to_window(mlx, textureInfoArray[11].img, x * TILE_SIZE, y * TILE_SIZE);
             x += 1;
         }
         y += 1;
@@ -54,7 +63,7 @@ void aff_map(int fd, mlx_t *mlx)
         {
             if (mapy.mapp[y][x] == 'C' ) // texture2 = collectable
                 mlx_image_to_window(mlx, textureInfoArray[2].img, x * TILE_SIZE, y * TILE_SIZE);
-            if (mapy.mapp[y][x] == 'P' ) // texture2 = collectable
+            if (mapy.mapp[y][x] == 'P' ) // texture4 = perso
                 mlx_image_to_window(mlx, textureInfoArray[4].img, x * TILE_SIZE, y * TILE_SIZE);
             x++;
         }

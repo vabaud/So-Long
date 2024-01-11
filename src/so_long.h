@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/13 19:05:18 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:10:35 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct lmp{
 } lamap;
 
 extern lamap mapy;
-extern TextureInfo textureInfoArray[8];
+extern TextureInfo textureInfoArray[13];
 
 void ft_hook(void* param);
 int main(void);
