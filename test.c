@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/16 19:10:52 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/11 15:14:15 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 #include <stdbool.h>
+#include <sys/time.h> 
 
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 400
 
 TextureInfo textureInfoArray[8];
 
-/* J'ai remis y=0 dans le fichier maps.c, j'ai enleve le free() et on peux pas passer dans le coin en haut a droite,
- mais y a un leak donc c'est possible que ce soit mon gnl.
-  On peux plus passer passer a travers les W et on peux monter que aux echelles */
-
+unsigned long long getCurrentTimeInMilliseconds() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000;
+}
 
 int isPositionValid(int x, int y) {
     // Vérifiez si la nouvelle position (x, y) ne correspond pas à un mur (représenté par '1' dans la carte)
@@ -46,27 +48,30 @@ int notladder(int x, int y)
 void ft_hook(void* param) {
     mlx_t* mlx = param;
 
+    static unsigned long long lastMoveTime = 0;
+    unsigned long long currentTime = getCurrentTimeInMilliseconds();
     if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
         mlx_close_window(mlx);
     int newX = textureInfoArray[4].img->instances->x;
     int newY = textureInfoArray[4].img->instances->y;
-    if (mlx_is_key_down(mlx, MLX_KEY_W) && notladder(newX, newY)) {
-        newY -= 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_S)) {
+    if (isPositionValid(newX, newY + 16) && !(notladder(newX, newY + 16)))
         newY += 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_A)) {
-        newX -= 16;
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_D)) {
-        newX += 16;
-    }
+    if (currentTime - lastMoveTime >= 350) {
+        if (mlx_is_key_down(mlx, MLX_KEY_W))
+            newY -= 16;
+        if (mlx_is_key_down(mlx, MLX_KEY_S))
+            newY += 16;
+        if (mlx_is_key_down(mlx, MLX_KEY_A))
+            newX -= 16;
+        if (mlx_is_key_down(mlx, MLX_KEY_D))
+            newX += 16;
     // Vérifier la collision avec les murs
-    if (isPositionValid(newX, newY)) {
-        // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
-        textureInfoArray[4].img->instances->x = newX;
-        textureInfoArray[4].img->instances->y = newY;
+        if (isPositionValid(newX, newY)) {
+            // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
+            textureInfoArray[4].img->instances->x = newX;
+            textureInfoArray[4].img->instances->y = newY;
+        }
+        lastMoveTime = currentTime;
     }
 }
 
