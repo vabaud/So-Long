@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/11 17:11:37 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:06:47 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,33 @@ int notladder(int x, int y)
 }
 
 void ft_hook(void* param) {
-    mlx_t* mlx = param;
+	mlx_t* mlx = param;
 
-    static unsigned long long lastMoveTime = 0;
-    unsigned long long currentTime = getCurrentTimeInMilliseconds();
-    if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(mlx);
-    int newX = textureInfoArray[4].img->instances->x;
-    int newY = textureInfoArray[4].img->instances->y;
-    if (isPositionValid(newX, newY + 16) && !(notladder(newX, newY + 16)))
-        newY += 16;
-    if (currentTime - lastMoveTime >= 350) {
-        if (mlx_is_key_down(mlx, MLX_KEY_W))
-            newY -= 16;
-        if (mlx_is_key_down(mlx, MLX_KEY_S))
-            newY += 16;
-        if (mlx_is_key_down(mlx, MLX_KEY_A))
-            newX -= 16;
-        if (mlx_is_key_down(mlx, MLX_KEY_D))
-            newX += 16;
-    // Vérifier la collision avec les murs
+	static unsigned long long lastMoveTime = 0;
+	unsigned long long currentTime = getCurrentTimeInMilliseconds();
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	int newX = textureInfoArray[4].img->instances->x;
+	int newY = textureInfoArray[4].img->instances->y;
+	if (isPositionValid(newX, newY + 16) && !(notladder(newX, newY + 16)))
+		newY += 16;
+	if (currentTime - lastMoveTime >= 350) {
+		if (mlx_is_key_down(mlx, MLX_KEY_W))
+			newY -= 16;
+		if (mlx_is_key_down(mlx, MLX_KEY_S))
+			newY += 16;
+		if (mlx_is_key_down(mlx, MLX_KEY_A))
+			newX -= 16;
+		if (mlx_is_key_down(mlx, MLX_KEY_D))
+			newX += 16;
+		// Vérifier la collision avec les murs
         if (isPositionValid(newX, newY)) {
             // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
-            textureInfoArray[4].img->instances->x = newX;
-            textureInfoArray[4].img->instances->y = newY;
-        }
-        lastMoveTime = currentTime;
-    }
+			textureInfoArray[4].img->instances->x = newX;
+			textureInfoArray[4].img->instances->y = newY;
+		}
+		lastMoveTime = currentTime;
+	}
 }
 
 void initializeTextures(mlx_t* mlx) {
