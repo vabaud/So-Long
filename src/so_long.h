@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/11 17:10:35 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:46:29 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,36 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"
 # include <stdbool.h>
+#include <sys/time.h> 
+#include <stdbool.h>
 
 typedef struct txt_inf{
     mlx_texture_t* texture;
     mlx_image_t* img;
 } TextureInfo;
 
-typedef struct lmp{
+typedef struct lmp {
     char** mapp;
 } lamap;
+
+typedef struct s_barrel{
+	int x, y;
+	int frame;
+} t_barrel;
 
 extern lamap mapy;
 extern TextureInfo textureInfoArray[13];
 
-void ft_hook(void* param);
-int main(void);
-int isPositionValid(int x, int y);
-void aff_map(int fd, mlx_t *mlx);
-// void draw_image(app_t *app);
+void	ft_hook(void* param); 
+int		main(void);
+int		isPositionValid(int x, int y);
+void	aff_map(int fd, mlx_t *mlx);
+void	update_barrel_position(t_barrel *tonneau, int window_width, int largeur_tonneau);
+void	update_barrel_animation(t_barrel *tonneau);
+void	initialiser_tonneaux(t_barrel *tonneaux, int window_width, int start_y);
+void	game_update(t_barrel *tonneaux, int window_width, int start_y);
+void	init_character_images(mlx_t* mlx);
+
+
 
 #endif

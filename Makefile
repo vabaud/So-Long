@@ -7,7 +7,9 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	:= 	test.c \
 			maps.c \
 			get_next_line_utils.c \
-			get_next_line.c
+			get_next_line.c \
+			mouv_perso.c \
+			#mouv_barrel.c
 
 OBJS	:= ${SRCS:.c=.o}
 
