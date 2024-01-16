@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/16 19:02:02 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/16 22:43:00 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-#define WIN_WIDTH 1248
-#define WIN_HEIGHT 512
+#define WIN_WIDTH 1500
+#define WIN_HEIGHT 600
 
 TextureInfo textureInfoArray[13];
 
@@ -81,7 +81,7 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[0].texture = mlx_load_png("png/rock32.png");
     textureInfoArray[1].texture = mlx_load_png("png/back32.png");
     textureInfoArray[2].texture = mlx_load_png("png/banana32.png");
-    textureInfoArray[3].texture = mlx_load_png("png/doorclose32.png");
+    textureInfoArray[3].texture = mlx_load_png("png/dooropen32.png");
     textureInfoArray[4].texture = mlx_load_png("png/kong32.png");
     textureInfoArray[5].texture = mlx_load_png("png/ladder32.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc32.png");
@@ -92,6 +92,7 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[11].texture = mlx_load_png("png/barrel4.png");
     textureInfoArray[12].texture = mlx_load_png("png/reversekong32.png");
 
+
 	while (i < 13)
 	{
 		textureInfoArray[i].img = mlx_texture_to_image(mlx, textureInfoArray[i].texture);
@@ -100,15 +101,15 @@ void initializeTextures(mlx_t* mlx) {
 	}
 }
 
-int main(void)
+
+
+int main(void)  
 {
     mlx_t* mlx;
 
     mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
     if (!mlx)
-    {
         return 1;
-    }
     initializeTextures(mlx);
 	init_character_images(mlx);
     int fd = open("maps/maps.ber", O_RDONLY);  // Ouvre le fichier en lecture seule
@@ -123,6 +124,8 @@ int main(void)
     // Affichage de la carte
     mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
+    // mlx_delete_image(mlx, normal);
+    // mlx_delete_image(mlx, flipped);
 	mlx_terminate(mlx);
 
 	return 0;

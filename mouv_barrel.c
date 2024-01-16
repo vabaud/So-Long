@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/12 18:48:46 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:05:29 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define TOTAL_FRAMES 4
 // #define window_width 0
 //#define start_y 0
+
 
 void initialiser_tonneaux(t_barrel *tonneaux, int window_width, int start_y)
 {
@@ -50,7 +51,7 @@ void game_update(t_barrel *tonneaux, int window_width, int start_y)
 {
     for (int i = 0; i < NUM_TONNEAUX; i++) {
         update_barrel_position(&tonneaux[i], window_width, start_y);
-        update_barrel_animation(&tonneaux[i], window_width, start_y);
+        //update_barrel_animation(&tonneaux[i], window_width, start_y);
         // Ici, ajoutez le code pour dessiner le tonneau en utilisant MLX42
         // mlx_draw_texture(tonneau_texture[tonneaux[i].frame], tonneaux[i].x, tonneaux[i].y);
     }
