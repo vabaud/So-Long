@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/14 19:12:01 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:02:02 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 400
+#define WIN_WIDTH 1248
+#define WIN_HEIGHT 512
 
 TextureInfo textureInfoArray[13];
 
@@ -78,20 +78,19 @@ extern mlx_image_t* flipped; // Face inversée = gauche
 
 void initializeTextures(mlx_t* mlx) {
     int i = 0;
-    textureInfoArray[0].texture = mlx_load_png("png/rock.png");
-    textureInfoArray[1].texture = mlx_load_png("png/back2.png");
-    textureInfoArray[2].texture = mlx_load_png("png/banana.png");
-    textureInfoArray[3].texture = mlx_load_png("png/door.png");
-    textureInfoArray[4].texture = mlx_load_png("png/kong2.png");
-    textureInfoArray[5].texture = mlx_load_png("png/ladder.png");
-    textureInfoArray[6].texture = mlx_load_png("png/bloc.png");
-    textureInfoArray[7].texture = mlx_load_png("png/fire.png");
+    textureInfoArray[0].texture = mlx_load_png("png/rock32.png");
+    textureInfoArray[1].texture = mlx_load_png("png/back32.png");
+    textureInfoArray[2].texture = mlx_load_png("png/banana32.png");
+    textureInfoArray[3].texture = mlx_load_png("png/doorclose32.png");
+    textureInfoArray[4].texture = mlx_load_png("png/kong32.png");
+    textureInfoArray[5].texture = mlx_load_png("png/ladder32.png");
+    textureInfoArray[6].texture = mlx_load_png("png/bloc32.png");
+    textureInfoArray[7].texture = mlx_load_png("png/fire32.png");
     textureInfoArray[8].texture = mlx_load_png("png/barrel1.png");
     textureInfoArray[9].texture = mlx_load_png("png/barrel2.png");
     textureInfoArray[10].texture = mlx_load_png("png/barrel3.png");
     textureInfoArray[11].texture = mlx_load_png("png/barrel4.png");
-    textureInfoArray[12].texture = mlx_load_png("png/reversekong.png");
-
+    textureInfoArray[12].texture = mlx_load_png("png/reversekong32.png");
 
 	while (i < 13)
 	{

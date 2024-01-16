@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_perso.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/14 19:34:39 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:29:59 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 mlx_image_t* normal;
 mlx_image_t* flipped;
 
+
+void collectible()
+{
+    size_t i = 0;
+    while (textureInfoArray[2].img->count >= i)
+    {
+	    if (textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].enabled == true && textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].x == textureInfoArray[4].img->instances[0].x && textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].y == textureInfoArray[4].img->instances[0].y)
+        {
+            textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].enabled = false;
+            mapy.nb_c++;
+        }
+        i++;
+    }
+}
 
 void init_character_images(mlx_t* mlx) {
 	mlx_texture_t* texture_normal = mlx_load_png("png/kong2.png");
@@ -30,8 +44,8 @@ void init_character_images(mlx_t* mlx) {
 
 int notladder(int x, int y)
 {
-	int mapX = x / 16;
-	int mapY = y / 16;
+	int mapX = x / 32;
+	int mapY = y / 32;
 	if (mapy.mapp[mapY][mapX] != 'Y')
 		return 0;
 	return 1;
@@ -45,11 +59,24 @@ unsigned long long getCurrentTimeInMilliseconds() {
 
 int isPositionValid(int x, int y) {
     // Vérifiez si la nouvelle position (x, y) ne correspond pas à un mur (représenté par '1' dans la carte)
-    int mapX = x / 16;
-    int mapY = y / 16;
+    int mapX = x / 32;
+    int mapY = y / 32;
     if (mapy.mapp[mapY][mapX] != 'W' && mapy.mapp[mapY][mapX] != '1')
         return 1;
     return 0;
+}
+
+bool jump(int x, int y)
+{
+    int mapX = x / 32;
+    int mapY = y / 32;
+
+    if (mapY < (mapy.maxy - 1))
+    {
+        if (mapy.mapp[mapY + 1][mapX] != 'W' && mapy.mapp[mapY + 1][mapX] != '1')
+            return (false);
+    }
+    return true;
 }
 
 void ft_hook(void* param)
@@ -58,43 +85,66 @@ void ft_hook(void* param)
 	mlx_image_t* img = flipped;
 
 	static unsigned long long lastMoveTime = 0;
+	static unsigned long long jumpTime = 0;
 	unsigned long long currentTime = getCurrentTimeInMilliseconds();
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-
 	int newX = textureInfoArray[4].img->instances->x;
 	int newY = textureInfoArray[4].img->instances->y;
-	
-	if (isPositionValid(newX, newY + 16) && !(notladder(newX, newY + 16)))
-		newY += 16;
-	if (currentTime - lastMoveTime >= 350) {
-		if (mlx_is_key_down(mlx, MLX_KEY_W))
-			newY -= 16;
+    collectible();
+    if (!isPositionValid(newX, newY + 32) || notladder(newX, newY) || notladder(newX, newY + 32))
+    {
+        mapy.gravity = 1;
+    }
+    if (mapy.mapp[newY / 32][newX / 32] == 'E' && (textureInfoArray[2].img->count == mapy.nb_c))
+    {
+        mlx_close_window(mlx);
+    }
+	if (isPositionValid(newX, newY + 32) && !(notladder(newX, newY + 32)) && currentTime - lastMoveTime >= 99)
+    {
+        if (jump(newX, newY + 32))
+        {
+            if (jumpTime == 3)
+            {
+                newY += 32;
+                jumpTime = 0;
+            }
+            jumpTime++;
+        }
+        else
+	        newY += 32;
+    }
+    if (currentTime - lastMoveTime >= 100)
+    {
+		if (mlx_is_key_down(mlx, MLX_KEY_W) && mapy.gravity == 1)
+        {
+			newY -= 32;
+            mapy.gravity = 0;
+        }
 		if (mlx_is_key_down(mlx, MLX_KEY_S))
-			newY += 16;
+			newY += 32;
 		if (mlx_is_key_down(mlx, MLX_KEY_A))
 		{
-		newX -= 16;
-		img = flipped;
+		    newX -= 32;
+		    img = flipped;
 		}
 		if (mlx_is_key_down(mlx, MLX_KEY_D))
 		{
-			newX += 16;
+			newX += 32;
 			img = normal;
 		}
-		if (isPositionValid(newX, newY))
-		{
-			// Mettre à jour la position du personnage uniquement si la nouvelle position est valide
-			textureInfoArray[4].img->instances[0].x = newX;
-			textureInfoArray[4].img->instances[0].y = newY;
-
-			if (img == flipped)
-				mlx_image_to_window(mlx, flipped, newX, newY);
-			else
-				mlx_image_to_window(mlx, normal, newX, newY);
-		}
-		lastMoveTime = currentTime;
-	}
+        lastMoveTime = currentTime;
+    }
+    if (isPositionValid(newX, newY))
+	{
+        // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
+        textureInfoArray[4].img->instances[0].x = newX;
+        textureInfoArray[4].img->instances[0].y = newY;
+        // if (img == flipped)
+        // 	mlx_image_to_window(mlx, flipped, newX, newY);
+        // else
+        // 	mlx_image_to_window(mlx, normal, newX, newY);
+    }
 }
 
 
