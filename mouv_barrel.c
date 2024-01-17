@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_barrel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/16 18:05:29 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:30:54 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,146 @@
 // #define window_width 0
 //#define start_y 0
 
-
-void initialiser_tonneaux(t_barrel *tonneaux, int window_width, int start_y)
+void mouv_right()
 {
-    for (int i = 0; i < NUM_TONNEAUX; i++) {
-        tonneaux[i].x = window_width;
-        tonneaux[i].y = start_y;
-        tonneaux[i].frame = 0;
+    textureInfoArray[8].img->instances[0].x += 8;
+    textureInfoArray[9].img->instances[0].x += 8;
+    textureInfoArray[10].img->instances[0].x += 8;
+    textureInfoArray[11].img->instances[0].x += 8;
+    if (textureInfoArray[8].img->enabled == true)
+    {
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[9].img->enabled = true;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[9].img->enabled == true)
+    {
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[10].img->enabled = true;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[10].img->enabled == true)
+    {
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[11].img->enabled = true;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[11].img->enabled == true)
+    {
+        textureInfoArray[11].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[8].img->enabled = true;
+        mapy.vit /= 1.005;
+    }
+}
+void mouv_left()
+{
+    textureInfoArray[8].img->instances[0].x -= 8;
+    textureInfoArray[9].img->instances[0].x -= 8;
+    textureInfoArray[10].img->instances[0].x -= 8;
+    textureInfoArray[11].img->instances[0].x -= 8;
+    if (textureInfoArray[8].img->enabled == true)
+    {
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[11].img->enabled = true;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[11].img->enabled == true)
+    {
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[10].img->enabled = true;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[10].img->enabled == true)
+    {
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[9].img->enabled = true;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[9].img->enabled == true)
+    {
+        textureInfoArray[11].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[8].img->enabled = true;
+        mapy.vit /= 1.005;
+    }
+}
+void mouv_down()
+{
+    textureInfoArray[8].img->instances[0].y += 8;
+    textureInfoArray[9].img->instances[0].y += 8;
+    textureInfoArray[10].img->instances[0].y += 8;
+    textureInfoArray[11].img->instances[0].y += 8;
+    if (textureInfoArray[8].img->enabled == true)
+    {
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[11].img->enabled = true;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[11].img->enabled == true)
+    {
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[10].img->enabled = true;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[10].img->enabled == true)
+    {
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[9].img->enabled = true;
+        textureInfoArray[8].img->enabled = false;
+        textureInfoArray[11].img->enabled = false;
+        mapy.vit /= 1.005;
+    }
+    else if (textureInfoArray[9].img->enabled == true)
+    {
+        textureInfoArray[11].img->enabled = false;
+        textureInfoArray[9].img->enabled = false;
+        textureInfoArray[10].img->enabled = false;
+        textureInfoArray[8].img->enabled = true;
+        mapy.vit /= 1.005;
     }
 }
 
-// Fonction pour mettre à jour la position du tonneau
-void update_barrel_position(t_barrel *tonneau, int window_width, int largeur_tonneau)
+
+void mouvBarrel(void)
 {
-    tonneau->x -= VITESSE; // Déplacer le tonneau vers la gauche
-    if (tonneau->x < -largeur_tonneau) {
-        tonneau->x = window_width; // Remettre à droite de l'écran
+    static unsigned long long	lastMoveTime = 0;
+    unsigned long long			currentTime;
+	currentTime = getCurrentTimeInMilliseconds();
+    static int sens = 1;
+    
+    if (currentTime - lastMoveTime >= mapy.vit)
+    {
+        if (isPositionValid(textureInfoArray[8].img->instances[0].x + 32, textureInfoArray[8].img->instances[0].y) && sens == 1)
+            mouv_right();
+        else if (isPositionValid(textureInfoArray[8].img->instances[0].x, textureInfoArray[8].img->instances[0].y + 32))
+        {
+            mouv_down();
+            mapy.vit = 100;
+        }
+        else if (isPositionValid(textureInfoArray[8].img->instances[0].x - 8, textureInfoArray[8].img->instances[0].y))
+        {
+            mouv_left();
+            sens = 0;
+        }
+        lastMoveTime = currentTime;
     }
 }
-
-// Fonction pour mettre à jour la frame de l'animation du tonneau
-void update_barrel_animation(t_barrel *tonneau)
-{
-    tonneau->frame = (tonneau->frame + 1) % TOTAL_FRAMES;
-}
-
-
-// Appelé à chaque frame par votre boucle de jeu
-void game_update(t_barrel *tonneaux, int window_width, int start_y)
-{
-    for (int i = 0; i < NUM_TONNEAUX; i++) {
-        update_barrel_position(&tonneaux[i], window_width, start_y);
-        //update_barrel_animation(&tonneaux[i], window_width, start_y);
-        // Ici, ajoutez le code pour dessiner le tonneau en utilisant MLX42
-        // mlx_draw_texture(tonneau_texture[tonneaux[i].frame], tonneaux[i].x, tonneaux[i].y);
-    }
-}
-
-
-// Dans votre fonction principale ou initialisation du jeu
-t_barrel tonneaux[NUM_TONNEAUX];
-//initialiser_tonneaux(tonneaux, window_width, start_y); // window_width et start_y doivent être définis
-// Initialiser les tonneaux ici...

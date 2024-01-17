@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 15:42:11 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:03:52 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	collectible(void)
 		}
 		i++;
 	}
+    if (textureInfoArray[2].img->count == mapy.nb_c)
+    {
+        textureInfoArray[3].img->enabled = false;
+        textureInfoArray[13].img->enabled = true;
+    }
 }
 
 bool	jump(int x, int y)
@@ -106,6 +111,11 @@ void	ft_hook(void *param)
 	newY = textureInfoArray[4].img->instances->y;
 	// mlx_put_image_to_window(mlx, mlx->win, img, newX, newY);
 	collectible();
+    mouvBarrel();
+    if (textureInfoArray[8].img->instances->x == textureInfoArray[4].img->instances->x && textureInfoArray[8].img->instances->y == textureInfoArray[4].img->instances->y)
+    {
+        mlx_close_window(mlx);
+    }    
 	if (!isPositionValid(newX, newY + 32) || notladder(newX, newY)
 		|| notladder(newX, newY + 32))
 	{

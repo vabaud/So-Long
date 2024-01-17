@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 15:38:23 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 20:24:22 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct lmp {
     int maxY;
     int gravity;
     size_t nb_c;
+    unsigned long long vit;
 } lamap;
 
 typedef struct s_barrel{
@@ -44,7 +45,7 @@ typedef struct s_barrel{
 } t_barrel;
 
 extern lamap mapy;
-extern TextureInfo textureInfoArray[13];
+extern TextureInfo textureInfoArray[14];
 
 void	ft_hook(void* param); 
 int		main(void);
@@ -54,7 +55,11 @@ void	update_barrel_position(t_barrel *tonneau, int window_width, int largeur_ton
 void	update_barrel_animation(t_barrel *tonneau);
 void	initialiser_tonneaux(t_barrel *tonneaux, int window_width, int start_y);
 void	game_update(t_barrel *tonneaux, int window_width, int start_y);
-
+void	collectible(void);
+bool	jump(int x, int y);
+int	    notladder(int x, int y);
+void    mouvBarrel(void);
+unsigned long long	getCurrentTimeInMilliseconds(void);
 
 
 #endif

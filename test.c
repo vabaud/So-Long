@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 15:33:12 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 17:18:45 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define WIN_WIDTH 1248
 #define WIN_HEIGHT 512
 
-TextureInfo textureInfoArray[13];
+TextureInfo textureInfoArray[14];
 
 // unsigned long long getCurrentTimeInMilliseconds() {
 //     struct timeval tv;
@@ -86,14 +86,15 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[5].texture = mlx_load_png("png/ladder32.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc32.png");
     textureInfoArray[7].texture = mlx_load_png("png/fire32.png");
-    textureInfoArray[8].texture = mlx_load_png("png/barrel1.png");
-    textureInfoArray[9].texture = mlx_load_png("png/barrel2.png");
-    textureInfoArray[10].texture = mlx_load_png("png/barrel3.png");
-    textureInfoArray[11].texture = mlx_load_png("png/barrel4.png");
+    textureInfoArray[8].texture = mlx_load_png("png/1barrel32.png");
+    textureInfoArray[9].texture = mlx_load_png("png/2barrel32.png");
+    textureInfoArray[10].texture = mlx_load_png("png/3barrel32.png");
+    textureInfoArray[11].texture = mlx_load_png("png/4barrel32.png");
     textureInfoArray[12].texture = mlx_load_png("png/reversekong32.png");
+    textureInfoArray[13].texture = mlx_load_png("png/dooropen32.png");
 
 
-	while (i < 13)
+	while (i < 14)
 	{
 		textureInfoArray[i].img = mlx_texture_to_image(mlx, textureInfoArray[i].texture);
 		mlx_delete_texture(textureInfoArray[i].texture);
