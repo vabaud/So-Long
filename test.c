@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 09:17:04 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:33:12 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void initializeTextures(mlx_t* mlx) {
     textureInfoArray[0].texture = mlx_load_png("png/rock32.png");
     textureInfoArray[1].texture = mlx_load_png("png/back32.png");
     textureInfoArray[2].texture = mlx_load_png("png/banana32.png");
-    textureInfoArray[3].texture = mlx_load_png("png/dooropen32.png");
+    textureInfoArray[3].texture = mlx_load_png("png/doorclose32.png");
     textureInfoArray[4].texture = mlx_load_png("png/kong32.png");
     textureInfoArray[5].texture = mlx_load_png("png/ladder32.png");
     textureInfoArray[6].texture = mlx_load_png("png/bloc32.png");
@@ -111,7 +111,6 @@ int main(void)
     if (!mlx)
         return 1;
     initializeTextures(mlx);
-	init_character_images(mlx);
     int fd = open("maps/maps.ber", O_RDONLY);  // Ouvre le fichier en lecture seule
 
 	if (fd == -1)

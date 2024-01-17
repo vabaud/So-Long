@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 09:37:43 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:38:23 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	update_barrel_position(t_barrel *tonneau, int window_width, int largeur_ton
 void	update_barrel_animation(t_barrel *tonneau);
 void	initialiser_tonneaux(t_barrel *tonneaux, int window_width, int start_y);
 void	game_update(t_barrel *tonneaux, int window_width, int start_y);
-void	init_character_images(mlx_t* mlx);
 
 
 
