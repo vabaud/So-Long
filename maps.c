@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 09:09:39 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:07:02 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void aff_map(int fd, mlx_t *mlx)
             if (mapy.mapp[y][x] == 'C' ) // texture2 = collectable
                 mlx_image_to_window(mlx, textureInfoArray[2].img, x * TILE_SIZE, y * TILE_SIZE);
             if (mapy.mapp[y][x] == 'P' ) // texture4 = perso
+            {
                 mlx_image_to_window(mlx, textureInfoArray[4].img, x * TILE_SIZE, y * TILE_SIZE);
+                mlx_image_to_window(mlx, textureInfoArray[12].img, x * TILE_SIZE, y * TILE_SIZE);
+                textureInfoArray[12].img->enabled = false;
+            }
             x++;
         }
         y++;

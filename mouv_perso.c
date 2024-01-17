@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 13:07:00 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/17 15:12:34 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,16 @@ void ft_hook(void* param)
 		{
 			img = flipped;
 			newX -= 32;
+            textureInfoArray[4].img->enabled = false;
+            textureInfoArray[12].img->enabled = true;
 			//mlx_clear(mlx, flipped);
 		}
 		if (mlx_is_key_down(mlx, MLX_KEY_D))
 		{
 			img = normal;
 			newX += 32;
+            textureInfoArray[12].img->enabled = false;
+            textureInfoArray[4].img->enabled = true;
 			//mlx_delete_image(mlx, normal);
 		}
 		if (isPositionValid(newX, newY))
@@ -144,6 +148,8 @@ void ft_hook(void* param)
 			// Mettre à jour la position du personnage uniquement si la nouvelle position est valide
 			textureInfoArray[4].img->instances[0].x = newX;
 			textureInfoArray[4].img->instances[0].y = newY;
+            textureInfoArray[12].img->instances[0].x = newX;
+			textureInfoArray[12].img->instances[0].y = newY;
 
 			// if (img == flipped)
 			// 	mlx_image_to_window(mlx, flipped, newX, newY);
