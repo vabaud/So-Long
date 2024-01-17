@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_perso.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/16 23:28:22 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:07:00 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,32 @@
 mlx_image_t* normal;
 mlx_image_t* flipped;
 mlx_image_t* background_image;
+
+void collectible()
+{
+    size_t i = 0;
+    while (textureInfoArray[2].img->count >= i)
+    {
+	    if (textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].enabled == true && textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].x == textureInfoArray[4].img->instances[0].x && textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].y == textureInfoArray[4].img->instances[0].y)
+        {
+            textureInfoArray[2].img->instances[textureInfoArray[2].img->count - i].enabled = false;
+            mapy.nb_c++;
+        }
+        i++;
+    }
+}
+
+bool jump(int x, int y)
+{
+    int mapX = x / 32;
+    int mapY = y / 32;
+    if (mapY < (mapy.maxY - 1))
+    {
+        if (mapy.mapp[mapY + 1][mapX] != 'W' && mapy.mapp[mapY + 1][mapX] != '1')
+            return (false);
+    }
+    return true;
+}
 
 void init_character_images(mlx_t* mlx)
 {
@@ -60,6 +86,7 @@ void ft_hook(void* param)
 	mlx_t* mlx = param;
 	mlx_image_t* img = flipped;
 
+    static unsigned long long jumpTime = 0;
 	static unsigned long long lastMoveTime = 0;
 	unsigned long long currentTime = getCurrentTimeInMilliseconds();
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
@@ -69,12 +96,35 @@ void ft_hook(void* param)
 	int newY = textureInfoArray[4].img->instances->y;
 	//mlx_put_image_to_window(mlx, mlx->win, img, newX, newY);
 
-	
-	if (isPositionValid(newX, newY + 32) && !(notladder(newX, newY + 32))) {
-		newY += 32; }
+	collectible();
+    if (!isPositionValid(newX, newY + 32) || notladder(newX, newY) || notladder(newX, newY + 32))
+    {
+        mapy.gravity = 1;
+    }
+    if (mapy.mapp[newY / 32][newX / 32] == 'E' && (textureInfoArray[2].img->count == mapy.nb_c))
+    {
+        mlx_close_window(mlx);
+    }
+	if (isPositionValid(newX, newY + 32) && !(notladder(newX, newY + 32)) && currentTime - lastMoveTime >= 99)
+    {
+        if (jump(newX, newY + 32))
+        {
+            if (jumpTime == 3)
+            {
+                newY += 32;
+                jumpTime = 0;
+            }
+            jumpTime++;
+        }
+        else
+	        newY += 32;
+    }
 	if (currentTime - lastMoveTime >= 100) {
-		if (mlx_is_key_down(mlx, MLX_KEY_W))
+		if (mlx_is_key_down(mlx, MLX_KEY_W) && mapy.gravity == 1)
+        {
 			newY -= 32;
+            mapy.gravity = 0;
+        }
 		if (mlx_is_key_down(mlx, MLX_KEY_S))
 			newY += 32;
 		if (mlx_is_key_down(mlx, MLX_KEY_A))

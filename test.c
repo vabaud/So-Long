@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/16 22:43:00 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/17 09:17:04 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-#define WIN_WIDTH 1500
-#define WIN_HEIGHT 600
+#define WIN_WIDTH 1248
+#define WIN_HEIGHT 512
 
 TextureInfo textureInfoArray[13];
 

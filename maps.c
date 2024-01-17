@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/16 17:50:24 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/17 09:09:39 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 lamap mapy;
 void aff_map(int fd, mlx_t *mlx)
 {
+    mapy.nb_c = 0;
     int x;
     int y = 0;
     mapy.mapp = malloc(100 * sizeof(char *));
@@ -55,6 +56,7 @@ void aff_map(int fd, mlx_t *mlx)
     }
     close(fd);
     int z = y;
+    mapy.maxY = y;
     y = 0;
     while (z > y)
     {
