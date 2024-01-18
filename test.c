@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 17:18:45 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/18 12:48:04 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ int main(void)
 	{
 		perror("Error opening file");
 		return (1);
-	}
+    }
     aff_map(fd, mlx);
+    isMapValid(mlx);
     close(fd);
     // Affichage de la carte
     mlx_loop_hook(mlx, ft_hook, mlx);

@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 20:30:54 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:40:22 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,152 +14,104 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-#define NUM_TONNEAUX 4
-#define VITESSE 1
-#define TOTAL_FRAMES 4
-// #define window_width 0
-//#define start_y 0
+void	mouv_right(void)
+{
+	int	i;
 
-void mouv_right()
-{
-    textureInfoArray[8].img->instances[0].x += 8;
-    textureInfoArray[9].img->instances[0].x += 8;
-    textureInfoArray[10].img->instances[0].x += 8;
-    textureInfoArray[11].img->instances[0].x += 8;
-    if (textureInfoArray[8].img->enabled == true)
-    {
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[9].img->enabled = true;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[9].img->enabled == true)
-    {
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[10].img->enabled = true;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[10].img->enabled == true)
-    {
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[11].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[11].img->enabled == true)
-    {
-        textureInfoArray[11].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[8].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
+	textureInfoArray[8].img->instances[0].x += 8;
+	textureInfoArray[9].img->instances[0].x += 8;
+	textureInfoArray[10].img->instances[0].x += 8;
+	textureInfoArray[11].img->instances[0].x += 8;
+	i = 0;
+	if (textureInfoArray[8].img->enabled == true)
+		i = 9;
+	else if (textureInfoArray[9].img->enabled == true)
+		i = 10;
+	else if (textureInfoArray[10].img->enabled == true)
+		i = 11;
+	else if (textureInfoArray[11].img->enabled == true)
+		i = 8;
+	textureInfoArray[8].img->enabled = false;
+	textureInfoArray[9].img->enabled = false;
+	textureInfoArray[10].img->enabled = false;
+	textureInfoArray[11].img->enabled = false;
+	textureInfoArray[i].img->enabled = true;
+	mapy.vit /= 1.005;
 }
-void mouv_left()
+void	mouv_left(void)
 {
-    textureInfoArray[8].img->instances[0].x -= 8;
-    textureInfoArray[9].img->instances[0].x -= 8;
-    textureInfoArray[10].img->instances[0].x -= 8;
-    textureInfoArray[11].img->instances[0].x -= 8;
-    if (textureInfoArray[8].img->enabled == true)
-    {
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[11].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[11].img->enabled == true)
-    {
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[10].img->enabled = true;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[10].img->enabled == true)
-    {
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[9].img->enabled = true;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[9].img->enabled == true)
-    {
-        textureInfoArray[11].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[8].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
+	int	i;
+
+	textureInfoArray[8].img->instances[0].x -= 8;
+	textureInfoArray[9].img->instances[0].x -= 8;
+	textureInfoArray[10].img->instances[0].x -= 8;
+	textureInfoArray[11].img->instances[0].x -= 8;
+	i = 0;
+	if (textureInfoArray[8].img->enabled == true)
+		i = 11;
+	else if (textureInfoArray[11].img->enabled == true)
+		i = 10;
+	else if (textureInfoArray[10].img->enabled == true)
+		i = 9;
+	else if (textureInfoArray[9].img->enabled == true)
+		i = 8;
+	textureInfoArray[8].img->enabled = false;
+	textureInfoArray[9].img->enabled = false;
+	textureInfoArray[10].img->enabled = false;
+	textureInfoArray[11].img->enabled = false;
+	textureInfoArray[i].img->enabled = true;
+	mapy.vit /= 1.005;
 }
-void mouv_down()
+void	mouv_down(void)
 {
-    textureInfoArray[8].img->instances[0].y += 8;
-    textureInfoArray[9].img->instances[0].y += 8;
-    textureInfoArray[10].img->instances[0].y += 8;
-    textureInfoArray[11].img->instances[0].y += 8;
-    if (textureInfoArray[8].img->enabled == true)
-    {
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[11].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[11].img->enabled == true)
-    {
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[10].img->enabled = true;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[10].img->enabled == true)
-    {
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[9].img->enabled = true;
-        textureInfoArray[8].img->enabled = false;
-        textureInfoArray[11].img->enabled = false;
-        mapy.vit /= 1.005;
-    }
-    else if (textureInfoArray[9].img->enabled == true)
-    {
-        textureInfoArray[11].img->enabled = false;
-        textureInfoArray[9].img->enabled = false;
-        textureInfoArray[10].img->enabled = false;
-        textureInfoArray[8].img->enabled = true;
-        mapy.vit /= 1.005;
-    }
+	int	i;
+
+	textureInfoArray[8].img->instances[0].y += 8;
+	textureInfoArray[9].img->instances[0].y += 8;
+	textureInfoArray[10].img->instances[0].y += 8;
+	textureInfoArray[11].img->instances[0].y += 8;
+	i = 0;
+	if (textureInfoArray[8].img->enabled == true)
+		i = 9;
+	else if (textureInfoArray[9].img->enabled == true)
+		i = 10;
+	else if (textureInfoArray[10].img->enabled == true)
+		i = 11;
+	else if (textureInfoArray[11].img->enabled == true)
+		i = 8;
+	textureInfoArray[8].img->enabled = false;
+	textureInfoArray[9].img->enabled = false;
+	textureInfoArray[10].img->enabled = false;
+	textureInfoArray[11].img->enabled = false;
+	textureInfoArray[i].img->enabled = true;
+	mapy.vit /= 1.005;
 }
 
-
-void mouvBarrel(void)
+void	mouvBarrel(void)
 {
-    static unsigned long long	lastMoveTime = 0;
-    unsigned long long			currentTime;
+	static unsigned long long	lastMoveTime = 0;
+	unsigned long long			currentTime;
+	static int					sens = 1;
+
 	currentTime = getCurrentTimeInMilliseconds();
-    static int sens = 1;
-    
-    if (currentTime - lastMoveTime >= mapy.vit)
-    {
-        if (isPositionValid(textureInfoArray[8].img->instances[0].x + 32, textureInfoArray[8].img->instances[0].y) && sens == 1)
-            mouv_right();
-        else if (isPositionValid(textureInfoArray[8].img->instances[0].x, textureInfoArray[8].img->instances[0].y + 32))
+	if (currentTime - lastMoveTime >= mapy.vit)
+	{
+		if (isPositionValid(textureInfoArray[8].img->instances[0].x + 32,
+				textureInfoArray[8].img->instances[0].y) && sens == 1)
+			mouv_right();
+		else if (isPositionValid(textureInfoArray[8].img->instances[0].x,
+				textureInfoArray[8].img->instances[0].y + 32)
+			&& ((textureInfoArray[8].img->instances[0].x + 32) % 32 == 0))
         {
-            mouv_down();
+			mouv_down();
             mapy.vit = 100;
         }
-        else if (isPositionValid(textureInfoArray[8].img->instances[0].x - 8, textureInfoArray[8].img->instances[0].y))
-        {
-            mouv_left();
-            sens = 0;
-        }
-        lastMoveTime = currentTime;
-    }
+		else if (isPositionValid(textureInfoArray[8].img->instances[0].x - 8,
+				textureInfoArray[8].img->instances[0].y))
+		{
+			mouv_left();
+			sens = 0;
+		}
+		lastMoveTime = currentTime;
+	}
 }

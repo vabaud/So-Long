@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 20:24:22 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/18 12:47:14 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct txt_inf{
 typedef struct lmp {
     char** mapp;
     int maxY;
+    int maxX;
     int gravity;
     size_t nb_c;
     unsigned long long vit;
@@ -60,6 +61,7 @@ bool	jump(int x, int y);
 int	    notladder(int x, int y);
 void    mouvBarrel(void);
 unsigned long long	getCurrentTimeInMilliseconds(void);
+void isMapValid();
 
 
 #endif

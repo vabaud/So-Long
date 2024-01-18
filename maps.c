@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/17 20:25:59 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:39:46 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void aff_map(int fd, mlx_t *mlx)
     close(fd);
     int z = y;
     mapy.maxY = y;
+    mapy.maxX = x;
     y = 0;
     while (z > y)
     {
