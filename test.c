@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/18 12:48:04 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:50:19 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,120 +14,72 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-#define WIN_WIDTH 1248
-#define WIN_HEIGHT 512
-
-TextureInfo textureInfoArray[14];
-
-// unsigned long long getCurrentTimeInMilliseconds() {
-//     struct timeval tv;
-//     gettimeofday(&tv, NULL);
-//     return (unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000;
-// }
-
-// int isPositionValid(int x, int y) {
-//     // Vérifiez si la nouvelle position (x, y) ne correspond pas à un mur (représenté par '1' dans la carte)
-//     int mapX = x / 16;
-//     int mapY = y / 16;
-//     if (mapy.mapp[mapY][mapX] != 'W' && mapy.mapp[mapY][mapX] != '1')
-//         return 1;
-//     return 0;
-// }
-
-// int notladder(int x, int y)
-// {
-//     int mapX = x / 16;
-//     int mapY = y / 16;
-//     if (mapy.mapp[mapY][mapX] != 'Y')
-//         return 0;
-//     return 1;
-// }
-
-//  void ft_hook(void* param) {
-// 	mlx_t* mlx = param;
-
-// 	static unsigned long long lastMoveTime = 0;
-// 	unsigned long long currentTime = getCurrentTimeInMilliseconds();
-// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-// 		mlx_close_window(mlx);
-// 	int newX = textureInfoArray[4].img->instances->x;
-// 	int newY = textureInfoArray[4].img->instances->y;
-// 	if (isPositionValid(newX, newY + 16) && !(notladder(newX, newY + 16)))
-// 		newY += 16;
-// 	if (currentTime - lastMoveTime >= 350) {
-// 		if (mlx_is_key_down(mlx, MLX_KEY_W))
-// 			newY -= 16;
-// 		if (mlx_is_key_down(mlx, MLX_KEY_S))
-// 			newY += 16;
-// 		if (mlx_is_key_down(mlx, MLX_KEY_A))
-// 			newX -= 16;
-// 		if (mlx_is_key_down(mlx, MLX_KEY_D))
-// 			newX += 16;
-// 		// Vérifier la collision avec les murs
-//         if (isPositionValid(newX, newY)) {
-//             // Mettre à jour la position du personnage uniquement si la nouvelle position est valide
-// 			textureInfoArray[4].img->instances->x = newX;
-// 			textureInfoArray[4].img->instances->y = newY;
-// 		}
-// 		lastMoveTime = currentTime;
-// 	}
-// }
-
-extern mlx_image_t* normal;  // Face normale = droite
-extern mlx_image_t* flipped; // Face inversée = gauche
-
-void initializeTextures(mlx_t* mlx) {
+void initializeTextures(mlx_t* mlx, t_all *all)
+{
     int i = 0;
-    textureInfoArray[0].texture = mlx_load_png("png/rock32.png");
-    textureInfoArray[1].texture = mlx_load_png("png/back32.png");
-    textureInfoArray[2].texture = mlx_load_png("png/banana32.png");
-    textureInfoArray[3].texture = mlx_load_png("png/doorclose32.png");
-    textureInfoArray[4].texture = mlx_load_png("png/kong32.png");
-    textureInfoArray[5].texture = mlx_load_png("png/ladder32.png");
-    textureInfoArray[6].texture = mlx_load_png("png/bloc32.png");
-    textureInfoArray[7].texture = mlx_load_png("png/fire32.png");
-    textureInfoArray[8].texture = mlx_load_png("png/1barrel32.png");
-    textureInfoArray[9].texture = mlx_load_png("png/2barrel32.png");
-    textureInfoArray[10].texture = mlx_load_png("png/3barrel32.png");
-    textureInfoArray[11].texture = mlx_load_png("png/4barrel32.png");
-    textureInfoArray[12].texture = mlx_load_png("png/reversekong32.png");
-    textureInfoArray[13].texture = mlx_load_png("png/dooropen32.png");
+    all->textInf[0].texture = mlx_load_png("png/rock32.png");
+    all->textInf[1].texture = mlx_load_png("png/back32.png");
+    all->textInf[2].texture = mlx_load_png("png/banana32.png");
+    all->textInf[3].texture = mlx_load_png("png/doorclose32.png");
+    all->textInf[4].texture = mlx_load_png("png/kong32.png");
+    all->textInf[5].texture = mlx_load_png("png/ladder32.png");
+    all->textInf[6].texture = mlx_load_png("png/bloc32.png");
+    all->textInf[7].texture = mlx_load_png("png/fire32.png");
+    all->textInf[8].texture = mlx_load_png("png/1barrel32.png");
+    all->textInf[9].texture = mlx_load_png("png/2barrel32.png");
+    all->textInf[10].texture = mlx_load_png("png/3barrel32.png");
+    all->textInf[11].texture = mlx_load_png("png/4barrel32.png");
+    all->textInf[12].texture = mlx_load_png("png/reversekong32.png");
+    all->textInf[13].texture = mlx_load_png("png/dooropen32.png");
+    all->textInf[14].texture = mlx_load_png("png/blast32.png");
+	all->textInf[15].texture = mlx_load_png("png/end1.png");
+	all->textInf[16].texture = mlx_load_png("png/end2.png");
+	all->textInf[17].texture = mlx_load_png("png/end3.png");
+	all->textInf[18].texture = mlx_load_png("png/end4.png");
+	all->textInf[19].texture = mlx_load_png("png/end5.png");
+	all->textInf[20].texture = mlx_load_png("png/end6.png");
+	all->textInf[21].texture = mlx_load_png("png/end7.png");
+	all->textInf[22].texture = mlx_load_png("png/end8.png");
+	all->textInf[23].texture = mlx_load_png("png/end9.png");
+	all->textInf[24].texture = mlx_load_png("png/end10.png");
+	all->textInf[25].texture = mlx_load_png("png/end11.png");
+	all->textInf[26].texture = mlx_load_png("png/end12.png");
+    all->textInf[27].texture = mlx_load_png("png/over.png");
 
 
-	while (i < 14)
+	while (i < 28)
 	{
-		textureInfoArray[i].img = mlx_texture_to_image(mlx, textureInfoArray[i].texture);
-		mlx_delete_texture(textureInfoArray[i].texture);
+		all->textInf[i].img = mlx_texture_to_image(mlx, all->textInf[i].texture);
+		mlx_delete_texture(all->textInf[i].texture);
 		i++;
 	}
 }
 
 
-
-int main(void)  
+int main(int ac, char **av)  
 {
-    mlx_t* mlx;
+    t_all all;
 
-    mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
-    if (!mlx)
+    all.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
+    if (!all.mlx)
         return 1;
-    initializeTextures(mlx);
-    int fd = open("maps/maps.ber", O_RDONLY);  // Ouvre le fichier en lecture seule
+    (void)ac;
+    initializeTextures(all.mlx, &all);
+    count_line(&all, av[1]);
+    int fd = open(av[1], O_RDONLY);  // Ouvre le fichier en lecture seule
 
 	if (fd == -1)
 	{
 		perror("Error opening file");
 		return (1);
     }
-    aff_map(fd, mlx);
-    isMapValid(mlx);
+    aff_map(fd, &all);
+    isMapValid(&all);
     close(fd);
     // Affichage de la carte
-    mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-    // mlx_delete_image(mlx, normal);
-    // mlx_delete_image(mlx, flipped);
-	mlx_terminate(mlx);
+    mlx_loop_hook(all.mlx, ft_hook, &all);
+	mlx_loop(all.mlx);
+	mlx_terminate(all.mlx);
 
 	return 0;
 }

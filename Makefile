@@ -11,6 +11,7 @@ SRCS	:= 	test.c \
 			mouv_perso.c \
 			mouv_barrel.c \
 			mapValid.c \
+			end.c \
 
 OBJS	:= ${SRCS:.c=.o}
 

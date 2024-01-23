@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/18 13:40:22 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/23 16:07:28 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,104 +14,102 @@
 #include "src/get_next_line.h"
 #include "src/so_long.h"
 
-void	mouv_right(void)
+void	mouv_right(t_all *all)
 {
 	int	i;
 
-	textureInfoArray[8].img->instances[0].x += 8;
-	textureInfoArray[9].img->instances[0].x += 8;
-	textureInfoArray[10].img->instances[0].x += 8;
-	textureInfoArray[11].img->instances[0].x += 8;
+	all->textInf[8].img->instances[0].x += 8;
+	all->textInf[9].img->instances[0].x += 8;
+	all->textInf[10].img->instances[0].x += 8;
+	all->textInf[11].img->instances[0].x += 8;
 	i = 0;
-	if (textureInfoArray[8].img->enabled == true)
+	if (all->textInf[8].img->enabled == true)
 		i = 9;
-	else if (textureInfoArray[9].img->enabled == true)
+	else if (all->textInf[9].img->enabled == true)
 		i = 10;
-	else if (textureInfoArray[10].img->enabled == true)
+	else if (all->textInf[10].img->enabled == true)
 		i = 11;
-	else if (textureInfoArray[11].img->enabled == true)
+	else if (all->textInf[11].img->enabled == true)
 		i = 8;
-	textureInfoArray[8].img->enabled = false;
-	textureInfoArray[9].img->enabled = false;
-	textureInfoArray[10].img->enabled = false;
-	textureInfoArray[11].img->enabled = false;
-	textureInfoArray[i].img->enabled = true;
-	mapy.vit /= 1.005;
+	all->textInf[8].img->enabled = false;
+	all->textInf[9].img->enabled = false;
+	all->textInf[10].img->enabled = false;
+	all->textInf[11].img->enabled = false;
+	all->textInf[i].img->enabled = true;
 }
-void	mouv_left(void)
+
+void	mouv_left(t_all *all)
 {
 	int	i;
 
-	textureInfoArray[8].img->instances[0].x -= 8;
-	textureInfoArray[9].img->instances[0].x -= 8;
-	textureInfoArray[10].img->instances[0].x -= 8;
-	textureInfoArray[11].img->instances[0].x -= 8;
+	all->textInf[8].img->instances[0].x -= 8;
+	all->textInf[9].img->instances[0].x -= 8;
+	all->textInf[10].img->instances[0].x -= 8;
+	all->textInf[11].img->instances[0].x -= 8;
 	i = 0;
-	if (textureInfoArray[8].img->enabled == true)
+	if (all->textInf[8].img->enabled == true)
 		i = 11;
-	else if (textureInfoArray[11].img->enabled == true)
+	else if (all->textInf[11].img->enabled == true)
 		i = 10;
-	else if (textureInfoArray[10].img->enabled == true)
+	else if (all->textInf[10].img->enabled == true)
 		i = 9;
-	else if (textureInfoArray[9].img->enabled == true)
+	else if (all->textInf[9].img->enabled == true)
 		i = 8;
-	textureInfoArray[8].img->enabled = false;
-	textureInfoArray[9].img->enabled = false;
-	textureInfoArray[10].img->enabled = false;
-	textureInfoArray[11].img->enabled = false;
-	textureInfoArray[i].img->enabled = true;
-	mapy.vit /= 1.005;
+	all->textInf[8].img->enabled = false;
+	all->textInf[9].img->enabled = false;
+	all->textInf[10].img->enabled = false;
+	all->textInf[11].img->enabled = false;
+	all->textInf[i].img->enabled = true;
 }
-void	mouv_down(void)
+
+void	mouv_down(t_all *all)
 {
 	int	i;
 
-	textureInfoArray[8].img->instances[0].y += 8;
-	textureInfoArray[9].img->instances[0].y += 8;
-	textureInfoArray[10].img->instances[0].y += 8;
-	textureInfoArray[11].img->instances[0].y += 8;
+	all->textInf[8].img->instances[0].y += 8;
+	all->textInf[9].img->instances[0].y += 8;
+	all->textInf[10].img->instances[0].y += 8;
+	all->textInf[11].img->instances[0].y += 8;
 	i = 0;
-	if (textureInfoArray[8].img->enabled == true)
+	if (all->textInf[8].img->enabled == true)
 		i = 9;
-	else if (textureInfoArray[9].img->enabled == true)
+	else if (all->textInf[9].img->enabled == true)
 		i = 10;
-	else if (textureInfoArray[10].img->enabled == true)
+	else if (all->textInf[10].img->enabled == true)
 		i = 11;
-	else if (textureInfoArray[11].img->enabled == true)
+	else if (all->textInf[11].img->enabled == true)
 		i = 8;
-	textureInfoArray[8].img->enabled = false;
-	textureInfoArray[9].img->enabled = false;
-	textureInfoArray[10].img->enabled = false;
-	textureInfoArray[11].img->enabled = false;
-	textureInfoArray[i].img->enabled = true;
-	mapy.vit /= 1.005;
+	all->textInf[8].img->enabled = false;
+	all->textInf[9].img->enabled = false;
+	all->textInf[10].img->enabled = false;
+	all->textInf[11].img->enabled = false;
+	all->textInf[i].img->enabled = true;
 }
 
-void	mouvBarrel(void)
+void	mouvBarrel(t_all *all)
 {
 	static unsigned long long	lastMoveTime = 0;
 	unsigned long long			currentTime;
 	static int					sens = 1;
 
 	currentTime = getCurrentTimeInMilliseconds();
-	if (currentTime - lastMoveTime >= mapy.vit)
+	if (currentTime - lastMoveTime >= all->move.vit)
 	{
-		if (isPositionValid(textureInfoArray[8].img->instances[0].x + 32,
-				textureInfoArray[8].img->instances[0].y) && sens == 1)
-			mouv_right();
-		else if (isPositionValid(textureInfoArray[8].img->instances[0].x,
-				textureInfoArray[8].img->instances[0].y + 32)
-			&& ((textureInfoArray[8].img->instances[0].x + 32) % 32 == 0))
-        {
-			mouv_down();
-            mapy.vit = 100;
-        }
-		else if (isPositionValid(textureInfoArray[8].img->instances[0].x - 8,
-				textureInfoArray[8].img->instances[0].y))
+		if (isPositionValid(all->textInf[8].img->instances[0].x + 32,
+				all->textInf[8].img->instances[0].y, all) && sens == 1)
+			mouv_right(all);
+		else if (isPositionValid(all->textInf[8].img->instances[0].x,
+				all->textInf[8].img->instances[0].y + 32, all)
+			&& ((all->textInf[8].img->instances[0].x + 32) % 32 == 0))
+			mouv_down(all);
+		else if (isPositionValid(all->textInf[8].img->instances[0].x - 8,
+				all->textInf[8].img->instances[0].y, all))
 		{
-			mouv_left();
+			mouv_left(all);
 			sens = 0;
 		}
+        if (all->move.vit > 50)
+            all->move.vit--;
 		lastMoveTime = currentTime;
 	}
 }
