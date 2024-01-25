@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/23 19:50:19 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/25 21:50:11 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,8 @@ void initializeTextures(mlx_t* mlx, t_all *all)
     all->textInf[12].texture = mlx_load_png("png/reversekong32.png");
     all->textInf[13].texture = mlx_load_png("png/dooropen32.png");
     all->textInf[14].texture = mlx_load_png("png/blast32.png");
-	all->textInf[15].texture = mlx_load_png("png/end1.png");
-	all->textInf[16].texture = mlx_load_png("png/end2.png");
-	all->textInf[17].texture = mlx_load_png("png/end3.png");
-	all->textInf[18].texture = mlx_load_png("png/end4.png");
-	all->textInf[19].texture = mlx_load_png("png/end5.png");
-	all->textInf[20].texture = mlx_load_png("png/end6.png");
-	all->textInf[21].texture = mlx_load_png("png/end7.png");
-	all->textInf[22].texture = mlx_load_png("png/end8.png");
-	all->textInf[23].texture = mlx_load_png("png/end9.png");
-	all->textInf[24].texture = mlx_load_png("png/end10.png");
-	all->textInf[25].texture = mlx_load_png("png/end11.png");
-	all->textInf[26].texture = mlx_load_png("png/end12.png");
-    all->textInf[27].texture = mlx_load_png("png/over.png");
 
-
-	while (i < 28)
+	while (i < 15)
 	{
 		all->textInf[i].img = mlx_texture_to_image(mlx, all->textInf[i].texture);
 		mlx_delete_texture(all->textInf[i].texture);

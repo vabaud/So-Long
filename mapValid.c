@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapValid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:06:50 by vabaud            #+#    #+#             */
-/*   Updated: 2024/01/23 20:03:10 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/25 22:10:31 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,4 @@ void isMapValid(t_all *all)
         y++;
     }
 }
+// tester sans la gravite et sans les collisions avec les blocs
