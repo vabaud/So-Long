@@ -3,73 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/25 21:50:16 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:29:57 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define TILE_SIZE 32
+# define TS 32
 
-#define WIN_WIDTH 1248
-#define WIN_HEIGHT 512
+# define WIN_WIDTH 1248
+# define WIN_HEIGHT 512
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"
+# include <fcntl.h>
 # include <stdbool.h>
-#include <sys/time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-typedef struct txt_inf{
-    mlx_texture_t* texture;
-    mlx_image_t* img;
-} TextureInfo;
+typedef struct txt_inf
+{
+	mlx_texture_t		*texture;
+	mlx_image_t			*img;
+}						t_texture_info;
 
-typedef struct {
-    int gravity;
-    unsigned long long vit;
-} movement;
+typedef struct movement
+{
+	int					gravity;
+	unsigned long long	vit;
+    int nb_move;
+}						t_movement;
 
-typedef struct lmp {
-    char** mapp;
-    int maxY;
-    int maxX;
-    size_t nb_c;
-    int nb_l;
-} lamap;
+typedef struct lmp
+{
+	char				**mapp;
+	int					max_x;
+	size_t				nb_c;
+	int					nb_l;
+}						t_lamap;
 
-typedef struct {
-    movement move; 
-    lamap mapy;
-    TextureInfo textInf[15];
-    mlx_t* mlx;
-} t_all;
+typedef struct all
+{
+	t_movement			move;
+	t_lamap				mapy;
+	t_texture_info		textinf[15];
+	mlx_t				*mlx;
+}						t_all;
 
-
-
-void	ft_hook(void* param); 
-int		main(int ac, char **av);
-void	count_line(t_all *all, char *argv);
-int		isPositionValid(int x, int y, t_all *all);
-void	aff_map(int fd, t_all *all);
-void	collectible(t_all *all);
-//bool	jump(int x, int y, t_all *all);
-int		notladder(int x, int y, t_all *all);
-void	mouvBarrel(t_all *all);
-void	mouv_down(t_all *all);
-void	mouv_left(t_all *all);
-void	mouv_right(t_all *all);
-unsigned long long	getCurrentTimeInMilliseconds(void);
-void	isMapValid(t_all *all);
-void	animate_next_frame(void *param);
-void	aff_back(int y, t_all *all);
+void					ft_hook(void *param);
+int						main(int ac, char **av);
+void					count_line(t_all *all, char *argv);
+int						is_pos_valid(int x, int y, t_all *all);
+void					aff_map(int fd, t_all *all);
+void					collectible(t_all *all);
+// bool	jump(int x, int y, t_all *all);
+int						notladder(int x, int y, t_all *all);
+void					mouv_barrel(t_all *all);
+void					mouv_down(t_all *all);
+void					mouv_left(t_all *all);
+void					mouv_right(t_all *all);
+unsigned long long		getCurrentTimeInMilliseconds(void);
+void					is_map_valid(t_all *all);
+void					animate_next_frame(void *param);
+void					aff_back(int y, t_all *all);
 
 #endif
