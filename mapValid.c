@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:06:50 by vabaud            #+#    #+#             */
-/*   Updated: 2024/01/26 12:18:17 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:28:47 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ void	is_map_valid(t_all *all)
 		y++;
 	}
 }
-// tester sans la gravite et sans les collisions avec les blocs

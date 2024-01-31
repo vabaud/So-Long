@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/26 14:29:57 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:28:58 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void					mouv_barrel(t_all *all);
 void					mouv_down(t_all *all);
 void					mouv_left(t_all *all);
 void					mouv_right(t_all *all);
-unsigned long long		getCurrentTimeInMilliseconds(void);
 void					is_map_valid(t_all *all);
 void					animate_next_frame(void *param);
 void					aff_back(int y, t_all *all);
