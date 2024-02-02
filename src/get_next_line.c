@@ -6,11 +6,11 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:25:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2023/12/11 16:43:49 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:40:20 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/get_next_line.h"
+#include "../inc/so_long.h"
 
 void	remove_until_newline(char *buffer)
 {

@@ -6,11 +6,11 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 01:15:08 by vabaud            #+#    #+#             */
-/*   Updated: 2024/01/11 18:14:32 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:40:34 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/get_next_line.h"
+#include "../inc/so_long.h"
 
 char	*ft_strjoin(char *s1, char *s2, size_t len_s1, size_t len_s2)
 {

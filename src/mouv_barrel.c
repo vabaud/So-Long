@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_barrel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/01/31 13:58:28 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/02 17:37:46 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/include/MLX42/MLX42.h"
-#include "src/get_next_line.h"
-#include "src/so_long.h"
+#include "../inc/so_long.h"
 
 void	mouv_right(t_all *all)
 {
 	int	i;
 
+	usleep(80000);
 	all->textinf[8].img->instances[0].x += 32;
 	all->textinf[9].img->instances[0].x += 32;
 	all->textinf[10].img->instances[0].x += 32;
@@ -42,6 +41,7 @@ void	mouv_left(t_all *all)
 {
 	int	i;
 
+	usleep(80000);
 	all->textinf[8].img->instances[0].x -= 32;
 	all->textinf[9].img->instances[0].x -= 32;
 	all->textinf[10].img->instances[0].x -= 32;
@@ -66,10 +66,10 @@ void	mouv_barrel(t_all *all)
 {
 	static int					sens = 1;
 
-    if (!is_pos_valid(all->textinf[8].img->instances[0].x - 8,
+	if (!is_pos_valid(all->textinf[8].img->instances[0].x - 8,
 			all->textinf[8].img->instances[0].y, all))
-            sens = 1;
-    usleep(50000);
+		sens = 1;
+	usleep(50000);
 	if (is_pos_valid(all->textinf[8].img->instances[0].x + 32,
 			all->textinf[8].img->instances[0].y, all) && sens == 1)
 		mouv_right(all);

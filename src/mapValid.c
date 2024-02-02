@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mapValid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:06:50 by vabaud            #+#    #+#             */
-/*   Updated: 2024/01/30 16:28:47 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/02 16:41:09 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/include/MLX42/MLX42.h"
-#include "src/get_next_line.h"
-#include "src/so_long.h"
+#include "../inc/so_long.h"
 
 void	is_map_valid(t_all *all)
 {
