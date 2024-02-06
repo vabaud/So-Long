@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/06 19:15:28 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/06 22:55:45 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	free_tab(char **tab)
 
 void	error(int ac, t_all *all)
 {
-	// char		*line;
-	// int		fd;
+	//char		*line;
+	//int			fd;
+	//const char	*filename = "map.ber";
 
 	if (ac != 2)
 	{
@@ -69,7 +70,7 @@ void	error(int ac, t_all *all)
 	if (!all->mlx)
 		exit(1);
 	// fd = open(filename, O_RDONLY);
-	// if (get_next_line(fd, &line) <= 0)
+	// if (get_next_line(fd) <= 0)
 	// {
 	// 	write(1, "Error opening file", 19);
 	// 	exit(1);

@@ -1,7 +1,6 @@
 Commande pour executer valgrind sans les leaks de la MLX42 : valgrind --leak-check=full --keep-debuginfo=yes --suppressions=mlx42.supp ./so_long "maps/maps.ber"
 
 
-
 		/\ \           /\ \ 	
 	   /  \ \         /  \ \ 	
 	  / /\ \_\       / /\ \_\	
@@ -33,6 +32,8 @@ Commande pour executer valgrind sans les leaks de la MLX42 : valgrind --leak-che
 Mlx put string pour afficher le nombre de mouv sur lecran
 
 
+
+
 ✅✅✅✅
 /2 barril en meme temps sur la maps (0leaks) (le 2eme bouge pas)
 /qund ya pas que des 1 autour de la maps (0leak)
@@ -47,14 +48,10 @@ jai ajouter exit(0) a la fonctions condition pour sortir du jeu qund jappuie sur
 
 
 
-
-
 void	display_number(t_all *all, int nb_move, int32_t x, int32_t y)
 {
 	char mouv[50];
-
 	move(all);
 	sprintf(mouv, "%d", all->move.nb_move);
-
 	mlx_put_string(all->mlx, mouv, x, y);
 }
