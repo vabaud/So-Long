@@ -1,6 +1,8 @@
-NAME	:= so_long
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX	:= MLX42
+NAME		:= so_long
+CFLAGS		+= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+LIBMLX		:= MLX42
+LIBFT_DIR	= libft/
+LIBFT		= $(LIBFT_DIR)libft.a
 
 SRC 	:= inc/so_long.h \
 
@@ -8,33 +10,36 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./src
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	:=	src/test.c \
 			src/maps.c \
-			src/get_next_line_utils.c \
-			src/get_next_line.c \
 			src/mouv_perso.c \
 			src/mouv_barrel.c \
 			src/mapValid.c \
-			#end.c 
+			src/get_next_line_utils.c \
+			src/get_next_line.c \
+			#src/add.c \
+			#src/end.c \
 
-# Ajoutez le chemin vers le dossier build ici
 OBJS	:= $(patsubst %.c,build/%.o,$(SRCS))
 INCLUDE = -I src
 
-all:	libmlx $(NAME)
+all:	libmlx $(LIBFT) $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
-
-# Modifiez la règle de compilation pour placer les fichiers .o dans le dossier build
 build/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) -c $< -o $@ $(INCLUDE)
+
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBFT) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -rf build
 	@rm -rf $(LIBMLX)/build
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@rm -rf $(NAME)

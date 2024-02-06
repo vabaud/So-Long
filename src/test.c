@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 18:56:10 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:15:28 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,41 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
+void	error(int ac, t_all *all)
+{
+	// char		*line;
+	// int		fd;
+
+	if (ac != 2)
+	{
+		write(1, "Erreur\n", 7);
+		exit(1);
+	}
+	all->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
+	if (!all->mlx)
+		exit(1);
+	// fd = open(filename, O_RDONLY);
+	// if (get_next_line(fd, &line) <= 0)
+	// {
+	// 	write(1, "Error opening file", 19);
+	// 	exit(1);
+	// }
+	// free(line);
+	// close(fd);
+}
+
+void	move(t_all *all)
+{
+	all->move.nb_move++;
+	printf("%d\n", all->move.nb_move);
+}
+
 int	main(int ac, char **av)
 {
 	t_all	all;
 	int		fd;
 
-	if (ac != 2)
-	{
-		write(1, "Erreur\n", 7);
-		return (1);
-	}
-	all.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
-	if (!all.mlx)
-		return (1);
-	(void)ac;
+	error(ac, &all);
 	all.move.nb_move = 0;
 	initialize_textures(all.mlx, &all);
 	count_line(&all, av[1]);
@@ -76,7 +97,7 @@ int	main(int ac, char **av)
 	if (fd == -1)
 	{
 		perror("Error opening file");
-		return (1);
+		return(1);
 	}
 	aff_map(fd, &all);
 	is_map_valid(&all);

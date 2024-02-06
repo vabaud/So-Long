@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 19:03:16 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:11:58 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,44 @@ void	conditions(t_all *all, int newX, int newY)
 {
 	if (all->mapy.mapp[newY / 32][newX / 32] == 'E'
 		&& (all->textinf[2].img->count == all->mapy.nb_c))
+	{
 		mlx_close_window(all->mlx);
+	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE)
 		|| (all->textinf[4].img->instances[0].x
 			== all->textinf[8].img->instances[0].x
 			&& all->textinf[4].img->instances[0].y
 			== all->textinf[8].img->instances[0].y))
+	{
 		mlx_close_window(all->mlx);
+	}
 }
 
 void	movements(t_all *all, int *newX, int *newY)
 {
 	if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+	{
 		*newY -= 32;
+		move(all);
+	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_S))
+	{
 		*newY += 32;
+		move(all);
+	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 	{
 		*newX -= 32;
 		all->textinf[4].img->enabled = false;
 		all->textinf[12].img->enabled = true;
+		move(all);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_D))
 	{
 		*newX += 32;
 		all->textinf[12].img->enabled = false;
 		all->textinf[4].img->enabled = true;
+		move(all);
 	}
 }
 
@@ -99,12 +111,11 @@ void	ft_hook(void *param)
 	movements(all, &newx, &newy);
 	if (is_pos_valid(newx, newy, all))
 	{
-		usleep(99999);
+		usleep(40000);
 		all->textinf[4].img->instances[0].x = newx;
 		all->textinf[4].img->instances[0].y = newy;
 		all->textinf[12].img->instances[0].x = newx;
 		all->textinf[12].img->instances[0].y = newy;
-		all->move.nb_move++;
 	}
 }
 

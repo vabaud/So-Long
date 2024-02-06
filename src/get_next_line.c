@@ -6,11 +6,12 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:25:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 16:40:20 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/03 21:15:27 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+#include "../libft/libft.h"
 
 void	remove_until_newline(char *buffer)
 {

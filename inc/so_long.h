@@ -6,7 +6,7 @@
 /*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 17:42:38 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:50:54 by tbihoues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # define WIN_HEIGHT 512
 
 # include "../MLX42/include/MLX42/MLX42.h"
-# include "get_next_line.h"
+# include "../inc/get_next_line.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -73,5 +74,8 @@ void					animate_next_frame(void *param);
 void					aff_back(int y, t_all *all);
 void					conditions(t_all *all, int newX, int newY);
 void					movements(t_all *all, int *newX, int *newY);
+void					error(int ac, t_all *all);
+void					display_number(t_all *all, int nb_move, int32_t x, int32_t y);
+void					move(t_all *all);
 
 #endif
