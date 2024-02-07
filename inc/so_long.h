@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/06 18:50:54 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/07 08:07:01 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct lmp
 	int					max_x;
 	size_t				nb_c;
 	int					nb_l;
+    int                 nb_e;
 }						t_lamap;
 
 typedef struct all
@@ -77,5 +78,7 @@ void					movements(t_all *all, int *newX, int *newY);
 void					error(int ac, t_all *all);
 void					display_number(t_all *all, int nb_move, int32_t x, int32_t y);
 void					move(t_all *all);
+bool                     flood(t_all *all, int x, int y);
+
 
 #endif

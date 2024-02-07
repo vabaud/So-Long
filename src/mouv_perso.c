@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_perso.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/06 19:11:58 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/07 07:13:30 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_pos_valid(int x, int y, t_all *all)
 
 	mapx = x / 32;
 	mapy = y / 32;
-	if (all->mapy.mapp[mapy][mapx] != 'W' && all->mapy.mapp[mapy][mapx] != '1')
+	if (all->mapy.mapp[mapy][mapx] != '1')
 		return (1);
 	return (0);
 }
