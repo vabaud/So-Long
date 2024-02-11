@@ -15,16 +15,16 @@ Commande pour executer valgrind sans les leaks de la MLX42 : valgrind --leak-che
 
 
 ❌❌❌❌
-/mettre le message maps invalide quand il ya un retour a la lignes dans le .ber 
-/gerer les lettres inconnue dans le .ber (sa fonctionne meme si on met pas une bonne lettre)
-/gerer si tout les collectibles sont accesible 
-/gerer sit le chemin est bien valide (acces a la sortie)
-/gerer si ya rien dans le .ber
-/gerer si la maps nest pas rectangulaire
-/gerer quand ya pas le perso sur la maps 'P' (1leaks)
-/retourner une erreur qund ya pas de sortie 
+/mettre le message maps invalide quand il ya un retour a la lignes dans le .ber  ✅✅✅✅
+/gerer les lettres inconnue dans le .ber (sa fonctionne meme si on met pas une bonne lettre) ✅✅✅✅
+/gerer si tout les collectibles sont accesible  ✅✅✅✅
+/gerer sit le chemin est bien valide (acces a la sortie) ✅✅✅✅
+/gerer si ya rien dans le .ber 
+/gerer si la maps nest pas rectangulaire ✅✅✅✅
+/gerer quand ya pas le perso sur la maps 'P' (1leaks)  ✅✅✅✅
+/retourner une erreur qund ya pas de sortie ✅✅✅✅
 /verifier si dautre carte .ber sa fonctionne correctement
-/retourner une erreur quand ya pas de player sur la maps
+/retourner une erreur quand ya pas de player sur la maps ✅✅✅✅
 
 
 

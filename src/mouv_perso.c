@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/07 07:13:30 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/11 12:11:24 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	ft_hook(void *param)
 	newx = all->textinf[4].img->instances->x;
 	newy = all->textinf[4].img->instances->y;
 	collectible(all);
-	mouv_barrel(all);
 	conditions(all, newx, newy);
+	mouv_barrel(all);
 	movements(all, &newx, &newy);
 	if (is_pos_valid(newx, newy, all))
 	{

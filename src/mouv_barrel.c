@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouv_barrel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 17:37:46 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/11 07:41:24 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,4 @@ void	mouv_barrel(t_all *all)
 		mouv_left(all);
 		sens = 0;
 	}
-	if (all->move.vit > 50)
-		all->move.vit--;
 }

@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/07 07:59:36 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:11:18 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	main(int ac, char **av)
 
 	error(ac, &all);
 	all.move.nb_move = 0;
-    all.mapy.nb_e = 0;
 	initialize_textures(all.mlx, &all);
 	count_line(&all, av[1]);
 	fd = open(av[1], O_RDONLY);

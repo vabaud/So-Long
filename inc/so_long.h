@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:24:31 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/07 08:07:01 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/11 07:42:25 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
 # include <time.h>
+# include <unistd.h>
 
 typedef struct txt_inf
 {
@@ -37,8 +37,6 @@ typedef struct txt_inf
 
 typedef struct movement
 {
-	int					gravity;
-	unsigned long long	vit;
 	int					nb_move;
 }						t_movement;
 
@@ -48,7 +46,9 @@ typedef struct lmp
 	int					max_x;
 	size_t				nb_c;
 	int					nb_l;
-    int                 nb_e;
+	int					nb_e;
+	int					nb_p;
+    int                 nb_other;
 }						t_lamap;
 
 typedef struct all
@@ -76,9 +76,15 @@ void					aff_back(int y, t_all *all);
 void					conditions(t_all *all, int newX, int newY);
 void					movements(t_all *all, int *newX, int *newY);
 void					error(int ac, t_all *all);
-void					display_number(t_all *all, int nb_move, int32_t x, int32_t y);
+void					display_number(t_all *all, int nb_move, int32_t x,
+							int32_t y);
 void					move(t_all *all);
-bool                     flood(t_all *all, int x, int y);
+bool					flood(t_all *all, int x, int y);
+void					free_tab(char **tab);
+void					closemap(t_all *all);
+void                    isok(t_all *all);
+void                    finish(t_all *all);
+void                    isrectangular(t_all *all);
 
 
 #endif

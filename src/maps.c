@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/03 20:05:15 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/11 07:42:13 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ void	aff_map(int fd, t_all *all)
 {
 	int	y;
 
-	all->move.vit = 200;
 	all->mapy.nb_c = 0;
+    all->mapy.nb_e = 0;
+    all->mapy.nb_p = 0;
+    all->mapy.nb_other = 0;
 	y = 0;
 	all->mapy.mapp = malloc(100 * sizeof(char *));
 	while (y < all->mapy.nb_l)
