@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 08:28:35 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 11:44:06 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,9 @@ void	aff_back(int y, t_all *all)
 		if (all->mapy.mapp[y][x] == 'E')
 		{
 			mlx_image_to_window(all->mlx, all->textinf[3].img, x * TS, y * TS);
-			mlx_image_to_window(all->mlx, all->textinf[13].img, x * TS, y * TS);
-			all->textinf[13].img->enabled = false;
+			mlx_image_to_window(all->mlx, all->textinf[10].img, x * TS, y * TS);
+			all->textinf[10].img->enabled = false;
 		}
-		if (all->mapy.mapp[y][x] == 'Y')
-			mlx_image_to_window(all->mlx, all->textinf[5].img, x * TS, y * TS);
-		if (all->mapy.mapp[y][x] == 'W')
-			mlx_image_to_window(all->mlx, all->textinf[6].img, x * TS, y * TS);
-		if (all->mapy.mapp[y][x] == 'F')
-			mlx_image_to_window(all->mlx, all->textinf[7].img, x * TS, y * TS);
-		if (all->mapy.mapp[y][x] == '2')
-			all->mapy.nb_enemy++;
 		x++;
 	}
 }
@@ -70,18 +62,16 @@ void	aff_front(int y, t_all *all)
 		if (all->mapy.mapp[y][x] == 'P')
 		{
 			mlx_image_to_window(all->mlx, all->textinf[4].img, x * TS, y * TS);
-			mlx_image_to_window(all->mlx, all->textinf[12].img, x * TS, y * TS);
-			all->textinf[12].img->enabled = false;
+			mlx_image_to_window(all->mlx, all->textinf[9].img, x * TS, y * TS);
+			all->textinf[4].img->enabled = false;
 		}
 		if (all->mapy.mapp[y][x] == '2')
 		{
+			mlx_image_to_window(all->mlx, all->textinf[5].img, x * TS, y * TS);
+			mlx_image_to_window(all->mlx, all->textinf[6].img, x * TS, y * TS);
+			mlx_image_to_window(all->mlx, all->textinf[7].img, x * TS, y * TS);
 			mlx_image_to_window(all->mlx, all->textinf[8].img, x * TS, y * TS);
-			mlx_image_to_window(all->mlx, all->textinf[9].img, x * TS, y * TS);
-			mlx_image_to_window(all->mlx, all->textinf[10].img, x * TS, y * TS);
-			mlx_image_to_window(all->mlx, all->textinf[11].img, x * TS, y * TS);
-			all->textinf[9].img->enabled = false;
-			all->textinf[10].img->enabled = false;
-			all->textinf[11].img->enabled = false;
+            all->mapy.nb_enemy++;
 		}
 		x++;
 	}

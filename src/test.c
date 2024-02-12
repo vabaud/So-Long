@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 09:14:58 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 11:00:50 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@ void	initialize_textures(mlx_t *mlx, t_all *all)
 	all->textinf[2].texture = mlx_load_png("png/banana32.png");
 	all->textinf[3].texture = mlx_load_png("png/doorclose32.png");
 	all->textinf[4].texture = mlx_load_png("png/kong32.png");
-	all->textinf[5].texture = mlx_load_png("png/ladder32.png");
-	all->textinf[6].texture = mlx_load_png("png/bloc32.png");
-	all->textinf[7].texture = mlx_load_png("png/fire32.png");
-	all->textinf[8].texture = mlx_load_png("png/1barrel32.png");
-	all->textinf[9].texture = mlx_load_png("png/2barrel32.png");
-	all->textinf[10].texture = mlx_load_png("png/3barrel32.png");
-	all->textinf[11].texture = mlx_load_png("png/4barrel32.png");
-	all->textinf[12].texture = mlx_load_png("png/reversekong32.png");
-	all->textinf[13].texture = mlx_load_png("png/dooropen32.png");
-	while (i < 14)
+	all->textinf[5].texture = mlx_load_png("png/1barrel32.png");
+	all->textinf[6].texture = mlx_load_png("png/2barrel32.png");
+	all->textinf[7].texture = mlx_load_png("png/3barrel32.png");
+	all->textinf[8].texture = mlx_load_png("png/4barrel32.png");
+	all->textinf[9].texture = mlx_load_png("png/reversekong32.png");
+	all->textinf[10].texture = mlx_load_png("png/dooropen32.png");
+	while (i < 11)
 	{
 		all->textinf[i].img = mlx_texture_to_image(mlx,
 				all->textinf[i].texture);

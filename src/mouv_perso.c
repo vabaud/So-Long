@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 08:32:25 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 11:46:38 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	collectible(t_all *all)
 	if (nbr == all->mapy.nb_c)
 	{
 		all->textinf[3].img->enabled = false;
-		all->textinf[13].img->enabled = true;
+		all->textinf[10].img->enabled = true;
 	}
 }
 
@@ -80,13 +80,13 @@ void	movements(t_all *all, int *newX, int *newY)
 	{
 		*newX -= 32;
 		all->textinf[4].img->enabled = false;
-		all->textinf[12].img->enabled = true;
+		all->textinf[9].img->enabled = true;
 		move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_D))
 	{
 		*newX += 32;
-		all->textinf[12].img->enabled = false;
+		all->textinf[9].img->enabled = false;
 		all->textinf[4].img->enabled = true;
 		move(all, newX, newY);
 	}
@@ -108,10 +108,10 @@ void	ft_hook(void *param)
 	movements(all, &newx, &newy);
 	if (is_pos_valid(newx, newy, all))
 	{
-		usleep(90000);
+		usleep(100000);
 		all->textinf[4].img->instances[0].x = newx;
 		all->textinf[4].img->instances[0].y = newy;
-		all->textinf[12].img->instances[0].x = newx;
-		all->textinf[12].img->instances[0].y = newy;
+		all->textinf[9].img->instances[0].x = newx;
+		all->textinf[9].img->instances[0].y = newy;
 	}
 }

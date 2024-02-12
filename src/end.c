@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbihoues <tbihoues@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:05:23 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/02 19:08:08 by tbihoues         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:56:01 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@
 
 // 	if ((double)(now - last_update) / CLOCKS_PER_SEC > 0.18)
 // 	{
-// 		if (all->textinf[8].img->instances->x ==
+// 		if (all->textinf[5].img->instances->x ==
 //			all->textinf[4].img->instances->x
-// 			&& all->textinf[8].img->instances->y ==
+// 			&& all->textinf[5].img->instances->y ==
 //			all->textinf[4].img->instances->y)
 // 		{
 // 			frame_functions[frame](all->mlx);
