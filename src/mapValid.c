@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:06:50 by vabaud            #+#    #+#             */
-/*   Updated: 2024/02/11 12:10:23 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 08:28:18 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	is_map_valid(t_all *all)
 {
-    isrectangular(all);
+	isrectangular(all);
 	isok(all);
 	if (all->mapy.nb_c < 1 || all->mapy.nb_e != 1 || all->mapy.nb_p != 1
 		|| all->mapy.nb_other > 0)
@@ -108,22 +108,22 @@ bool	flood(t_all *all, int x, int y)
 		return (false);
 }
 
-void isrectangular(t_all *all)
+void	isrectangular(t_all *all)
 {
-    int y;
-    size_t len;
+	int		y;
+	size_t	len;
 
-    y = 0;
-    len = ft_strlen(all->mapy.mapp[y]);
-    y++;
-    while (y < all->mapy.nb_l)
-    {
-        if (ft_strlen(all->mapy.mapp[y]) != len)
-        {
-            free_tab(all->mapy.mapp);
-            mlx_terminate(all->mlx);
-            exit(EXIT_FAILURE);
-        }
-        y++;
-    }
+	y = 0;
+	len = ft_strlen(all->mapy.mapp[y]);
+	y++;
+	while (y < all->mapy.nb_l)
+	{
+		if (ft_strlen(all->mapy.mapp[y]) != len)
+		{
+			free_tab(all->mapy.mapp);
+			mlx_terminate(all->mlx);
+			exit(EXIT_FAILURE);
+		}
+		y++;
+	}
 }

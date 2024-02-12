@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:42:43 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/11 07:41:24 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 08:30:22 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ void	mouv_left(t_all *all)
 
 void	mouv_barrel(t_all *all)
 {
-	static int					sens = 1;
+	static int	sens = 1;
 
+	if (all->textinf[4].img->instances[0].x
+		== all->textinf[8].img->instances[0].x
+		&& all->textinf[4].img->instances[0].y
+		== all->textinf[8].img->instances[0].y)
+		mlx_close_window(all->mlx);
 	if (!is_pos_valid(all->textinf[8].img->instances[0].x - 8,
 			all->textinf[8].img->instances[0].y, all))
 		sens = 1;
-	usleep(50000);
 	if (is_pos_valid(all->textinf[8].img->instances[0].x + 32,
 			all->textinf[8].img->instances[0].y, all) && sens == 1)
 		mouv_right(all);

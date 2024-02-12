@@ -23,7 +23,7 @@ Commande pour executer valgrind sans les leaks de la MLX42 : valgrind --leak-che
 /gerer si la maps nest pas rectangulaire ✅✅✅✅
 /gerer quand ya pas le perso sur la maps 'P' (1leaks)  ✅✅✅✅
 /retourner une erreur qund ya pas de sortie ✅✅✅✅
-/verifier si dautre carte .ber sa fonctionne correctement
+/verifier si dautre carte .ber sa fonctionne correctement ✅✅✅✅
 /retourner une erreur quand ya pas de player sur la maps ✅✅✅✅
 
 

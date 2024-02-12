@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/09 16:11:18 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/02/12 09:14:58 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	initialize_textures(mlx_t *mlx, t_all *all)
 	all->textinf[11].texture = mlx_load_png("png/4barrel32.png");
 	all->textinf[12].texture = mlx_load_png("png/reversekong32.png");
 	all->textinf[13].texture = mlx_load_png("png/dooropen32.png");
-	all->textinf[14].texture = mlx_load_png("png/blast32.png");
-	while (i < 15)
+	while (i < 14)
 	{
 		all->textinf[i].img = mlx_texture_to_image(mlx,
 				all->textinf[i].texture);
@@ -57,10 +56,6 @@ void	free_tab(char **tab)
 
 void	error(int ac, t_all *all)
 {
-	//char		*line;
-	//int			fd;
-	//const char	*filename = "map.ber";
-
 	if (ac != 2)
 	{
 		write(1, "Erreur\n", 7);
@@ -69,20 +64,20 @@ void	error(int ac, t_all *all)
 	all->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
 	if (!all->mlx)
 		exit(1);
-	// fd = open(filename, O_RDONLY);
-	// if (get_next_line(fd) <= 0)
-	// {
-	// 	write(1, "Error opening file", 19);
-	// 	exit(1);
-	// }
-	// free(line);
-	// close(fd);
 }
 
-void	move(t_all *all)
+void	move(t_all *all, int *newX, int *newY)
 {
-	all->move.nb_move++;
-	printf("%d\n", all->move.nb_move);
+	int	x;
+	int	y;
+
+	x = *newX;
+	y = *newY;
+	if (is_pos_valid(x, y, all))
+	{
+		all->move.nb_move++;
+		printf("Nombre de mouvements : %d\n", all->move.nb_move);
+	}
 }
 
 int	main(int ac, char **av)
@@ -98,7 +93,7 @@ int	main(int ac, char **av)
 	if (fd == -1)
 	{
 		perror("Error opening file");
-		return(1);
+		return (1);
 	}
 	aff_map(fd, &all);
 	is_map_valid(&all);
