@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabaud <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 12:15:49 by vabaud            #+#    #+#             */
-/*   Updated: 2023/10/26 09:45:50 by vabaud           ###   ########.fr       */
+/*   Created: 2023/10/23 18:32:51 by vabaud            #+#    #+#             */
+/*   Updated: 2023/11/08 17:59:49 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+/* recherche la dernière occurrence d'un caractère donné */
+
+char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (*s)
-	{
+	while (s[i])
 		i++;
-		s++;
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	return (i);
+	return (NULL);
 }

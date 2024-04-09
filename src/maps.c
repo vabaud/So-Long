@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:17:09 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 11:44:06 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/04/05 19:59:41 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	count_line(t_all *all, char *argv)
 		line = get_next_line(fd);
 		all->mapy.nb_l++;
 	}
+	free(line);
 	close(fd);
 }
 
@@ -71,7 +72,7 @@ void	aff_front(int y, t_all *all)
 			mlx_image_to_window(all->mlx, all->textinf[6].img, x * TS, y * TS);
 			mlx_image_to_window(all->mlx, all->textinf[7].img, x * TS, y * TS);
 			mlx_image_to_window(all->mlx, all->textinf[8].img, x * TS, y * TS);
-            all->mapy.nb_enemy++;
+			all->mapy.nb_enemy++;
 		}
 		x++;
 	}
@@ -87,7 +88,7 @@ void	aff_map(int fd, t_all *all)
 	all->mapy.nb_p = 0;
 	all->mapy.nb_other = 0;
 	y = 0;
-	all->mapy.mapp = malloc(100 * sizeof(char *));
+	all->mapy.mapp = malloc((all->mapy.nb_l + 1) * sizeof(char *));
 	while (y < all->mapy.nb_l)
 	{
 		all->mapy.mapp[y] = get_next_line(fd);
@@ -95,7 +96,6 @@ void	aff_map(int fd, t_all *all)
 		y++;
 	}
 	all->mapy.mapp[y] = NULL;
-	close(fd);
 	all->mapy.max_x = ft_strlen(all->mapy.mapp[1]);
 	y = 0;
 	while (y < all->mapy.nb_l)

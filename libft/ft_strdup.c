@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 10:21:36 by vabaud            #+#    #+#             */
-/*   Updated: 2023/11/08 18:38:52 by vabaud           ###   ########.fr       */
+/*   Created: 2023/10/23 18:02:24 by vabaud            #+#    #+#             */
+/*   Updated: 2023/11/23 02:18:05 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* renvoie une nouvelle chaîne de caractères qui est la
-concaténation de s1 et s2 */
+/* utilisée pour dupliquer (copier) une chaîne de caractères */
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s1)
 {
-	char	*nstr;
-	size_t	i;
-	size_t	j;
-	size_t	total_lenght;
+	size_t		i;
+	char		*s2;
 
 	i = 0;
-	j = 0;
-	total_lenght = ft_strlen(s1) + ft_strlen(s2);
-	nstr = (char *)malloc(sizeof(char) * (total_lenght + 1));
-	if (!nstr)
+	s2 = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
-		nstr[i] = s1[i];
+		s2[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		nstr[i] = s2[j];
-		i++;
-		j++;
-	}
-	nstr[i] = '\0';
-	return (nstr);
+	s2[i] = '\0';
+	return (s2);
 }

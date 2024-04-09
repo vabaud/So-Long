@@ -8,15 +8,12 @@ SRC 	:= inc/so_long.h \
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./src
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:=	src/test.c \
+SRCS	:=	src/main.c \
 			src/maps.c \
 			src/mouv_perso.c \
 			src/mouv_barrel.c \
 			src/mapValid.c \
-			src/get_next_line_utils.c \
-			src/get_next_line.c \
-			#src/add.c \
-			#src/end.c \
+			src/exit.c \
 
 OBJS	:= $(patsubst %.c,build/%.o,$(SRCS))
 INCLUDE = -I src

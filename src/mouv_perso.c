@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 11:46:38 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/04/05 19:59:42 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,26 @@ void	movements(t_all *all, int *newX, int *newY)
 	if (mlx_is_key_down(all->mlx, MLX_KEY_W))
 	{
 		*newY -= 32;
-		move(all, newX, newY);
+		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_S))
 	{
 		*newY += 32;
-		move(all, newX, newY);
+		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 	{
 		*newX -= 32;
 		all->textinf[4].img->enabled = false;
 		all->textinf[9].img->enabled = true;
-		move(all, newX, newY);
+		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_D))
 	{
 		*newX += 32;
 		all->textinf[9].img->enabled = false;
 		all->textinf[4].img->enabled = true;
-		move(all, newX, newY);
+		aff_nb_move(all, newX, newY);
 	}
 }
 
@@ -106,9 +106,9 @@ void	ft_hook(void *param)
 	if (all->mapy.nb_enemy > 0)
 		mouv_barrel(all);
 	movements(all, &newx, &newy);
+	usleep(80000);
 	if (is_pos_valid(newx, newy, all))
 	{
-		usleep(100000);
 		all->textinf[4].img->instances[0].x = newx;
 		all->textinf[4].img->instances[0].y = newy;
 		all->textinf[9].img->instances[0].x = newx;

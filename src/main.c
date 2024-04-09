@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:51:52 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/02/12 11:00:50 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/04/10 00:29:15 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,7 @@ void	initialize_textures(mlx_t *mlx, t_all *all)
 	}
 }
 
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-}
-
-void	error(int ac, t_all *all)
-{
-	if (ac != 2)
-	{
-		write(1, "Erreur\n", 7);
-		exit(1);
-	}
-	all->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
-	if (!all->mlx)
-		exit(1);
-}
-
-void	move(t_all *all, int *newX, int *newY)
+void	aff_nb_move(t_all *all, int *newX, int *newY)
 {
 	int	x;
 	int	y;
@@ -82,22 +56,26 @@ int	main(int ac, char **av)
 	t_all	all;
 	int		fd;
 
-	error(ac, &all);
-	all.move.nb_move = 0;
-	initialize_textures(all.mlx, &all);
-	count_line(&all, av[1]);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	if (ac == 2)
 	{
-		perror("Error opening file");
-		return (1);
+		all.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "So_Long", true);
+		all.move.nb_move = 0;
+		initialize_textures(all.mlx, &all);
+		count_line(&all, av[1]);
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
+		{
+			ft_printf("Error opening file");
+			return (1);
+		}
+		aff_map(fd, &all);
+		is_map_valid(&all);
+		close(fd);
+		mlx_loop_hook(all.mlx, ft_hook, &all);
+		mlx_loop(all.mlx);
+		mlx_terminate(all.mlx);
+		free_tab(all.mapy.mapp);
 	}
-	aff_map(fd, &all);
-	is_map_valid(&all);
-	close(fd);
-	mlx_loop_hook(all.mlx, ft_hook, &all);
-	mlx_loop(all.mlx);
-	mlx_terminate(all.mlx);
-	free_tab(all.mapy.mapp);
 	return (0);
 }
+

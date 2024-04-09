@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 10:21:36 by vabaud            #+#    #+#             */
-/*   Updated: 2023/11/08 18:38:52 by vabaud           ###   ########.fr       */
+/*   Created: 2023/10/23 18:08:44 by vabaud            #+#    #+#             */
+/*   Updated: 2024/03/26 15:24:39 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* renvoie une nouvelle chaîne de caractères qui est la
-concaténation de s1 et s2 */
-
-char	*ft_strjoin(char const *s1, char const *s2)
+long	ft_atoi(const char *str)
 {
-	char	*nstr;
-	size_t	i;
-	size_t	j;
-	size_t	total_lenght;
+	int		neg;
+	int		i;
+	long	res;
 
 	i = 0;
-	j = 0;
-	total_lenght = ft_strlen(s1) + ft_strlen(s2);
-	nstr = (char *)malloc(sizeof(char) * (total_lenght + 1));
-	if (!nstr)
-		return (NULL);
-	while (s1[i] != '\0')
+	neg = 1;
+	res = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		nstr[i] = s1[i];
+		if (str[i] == '-')
+			neg *= -1;
 		i++;
 	}
-	while (s2[j] != '\0')
+	while (str[i] >= 48 && str[i] <= 57)
 	{
-		nstr[i] = s2[j];
+		res = res * 10 + (str[i] - 48);
 		i++;
-		j++;
 	}
-	nstr[i] = '\0';
-	return (nstr);
+	return (res * neg);
 }

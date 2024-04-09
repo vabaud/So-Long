@@ -1,44 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 10:21:36 by vabaud            #+#    #+#             */
-/*   Updated: 2023/11/08 18:38:52 by vabaud           ###   ########.fr       */
+/*   Created: 2023/10/24 17:15:21 by vabaud            #+#    #+#             */
+/*   Updated: 2023/11/08 18:01:37 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* renvoie une nouvelle chaîne de caractères qui est la
-concaténation de s1 et s2 */
+/* recherche la première occurrence d'une sous-chaîne s2 dans une chaîne s1 */
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	char	*nstr;
+	size_t	s2_len;
 	size_t	i;
 	size_t	j;
-	size_t	total_lenght;
+	char	*a;
 
+	a = (char *)s1;
+	s2_len = 0;
+	while (s2[s2_len])
+		s2_len++;
+	if (s2_len == 0)
+		return (a);
 	i = 0;
-	j = 0;
-	total_lenght = ft_strlen(s1) + ft_strlen(s2);
-	nstr = (char *)malloc(sizeof(char) * (total_lenght + 1));
-	if (!nstr)
-		return (NULL);
-	while (s1[i] != '\0')
+	while (a[i] && i < len)
 	{
-		nstr[i] = s1[i];
+		j = 0;
+		while (a[i + j] && s2[j] && a[i + j] == s2[j] && i + j < len)
+			j++;
+		if (j == s2_len)
+		{
+			return (a + i);
+		}
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		nstr[i] = s2[j];
-		i++;
-		j++;
-	}
-	nstr[i] = '\0';
-	return (nstr);
+	return (NULL);
 }
