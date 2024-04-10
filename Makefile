@@ -4,7 +4,7 @@ LIBMLX		:= MLX42
 LIBFT_DIR	= libft/
 LIBFT		= $(LIBFT_DIR)libft.a
 
-SRC 	:= inc/so_long.h \
+SRC 	:= inc/so_long.h
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I ./src
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
@@ -16,15 +16,16 @@ SRCS	:=	src/main.c \
 			src/exit.c \
 
 OBJS	:= $(patsubst %.c,build/%.o,$(SRCS))
+DEPS	:= $(OBJS:.o=.d)
 INCLUDE = -I src
 
 all:	libmlx $(LIBFT) $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
 build/%.o: %.c
 	@mkdir -p $(@D)
-
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(LIBFT):
@@ -41,6 +42,8 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 
-re: clean all
+re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all, clean, fclean, re, libmlx

@@ -6,7 +6,7 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:20:56 by tbihoues          #+#    #+#             */
-/*   Updated: 2024/04/05 19:59:42 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:33:59 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,22 @@ void	movements(t_all *all, int *newX, int *newY)
 	if (mlx_is_key_down(all->mlx, MLX_KEY_W))
 	{
 		*newY -= 32;
-		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_S))
 	{
 		*newY += 32;
-		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 	{
 		*newX -= 32;
 		all->textinf[4].img->enabled = false;
 		all->textinf[9].img->enabled = true;
-		aff_nb_move(all, newX, newY);
 	}
 	if (mlx_is_key_down(all->mlx, MLX_KEY_D))
 	{
 		*newX += 32;
 		all->textinf[9].img->enabled = false;
 		all->textinf[4].img->enabled = true;
-		aff_nb_move(all, newX, newY);
 	}
 }
 
@@ -109,6 +105,8 @@ void	ft_hook(void *param)
 	usleep(80000);
 	if (is_pos_valid(newx, newy, all))
 	{
+        if ((all->textinf[4].img->instances[0].x != newx) || (all->textinf[4].img->instances[0].y != newy))
+            aff_nb_move(all, &newx, &newy);
 		all->textinf[4].img->instances[0].x = newx;
 		all->textinf[4].img->instances[0].y = newy;
 		all->textinf[9].img->instances[0].x = newx;

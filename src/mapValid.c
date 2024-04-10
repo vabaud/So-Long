@@ -6,11 +6,29 @@
 /*   By: vabaud <vabaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:06:50 by vabaud            #+#    #+#             */
-/*   Updated: 2024/04/09 20:27:50 by vabaud           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:25:30 by vabaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+void	isber(char *av)
+{
+	size_t	i;
+
+	i = 0;
+	i = ft_strlen(av);
+	i--;
+    while (av[i] == ' ' || av[i] == '\t')
+    {
+        i--;
+    }
+	if (av[i] != 'r' || av[i - 1] != 'e' || av[i - 2] != 'b' || av[i - 3] != '.')
+	{
+		ft_printf("Map must be a .ber");
+		exit(EXIT_FAILURE);
+	}
+}
 
 void	is_map_valid(t_all *all)
 {
